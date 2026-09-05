@@ -1,0 +1,29 @@
+name: macOS Intel build
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-15-intel
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: brew install nasm sdl2
+      - run: python3 -m pip install Pillow
+      - run: python3 macos/build.py
+      - name: Check CPU rendering and bundled application
+        run: |
+          build/macos/jesussaves --help
+          build/macos/jesussaves --cpu --snapshot
+          python3 -c 'from PIL import Image; im=Image.open("flame.ppm"); assert im.size == (3840,2160)'
+          codesign --verify --deep --strict 'build/macos/Jesus Saves.app'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-intel
+          path: dist/jesussaves-macos-intel.zip

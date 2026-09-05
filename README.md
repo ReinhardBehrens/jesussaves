@@ -128,3 +128,7 @@ Turn to Jesus in faith. Speak honestly to Him in prayer, ask His forgiveness, an
 [⭐ Visit the repository](https://github.com/ReinhardBehrens/jesussaves) · [📥 Get the latest release](https://github.com/ReinhardBehrens/jesussaves/releases/latest)
 
 </div>
+
+### macOS preview build
+
+An Intel Mac application build is available through the [macOS build workflow](https://github.com/ReinhardBehrens/jesussaves/actions/workflows/macos.yml). See [build instructions and compatibility](macos/README.md). This is a standalone app; macOS Screen Saver settings integration and native Apple Silicon support are not yet included.
