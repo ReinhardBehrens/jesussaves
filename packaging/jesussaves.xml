@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<screensaver name="jesussaves" _label="Jesus Saves 4K">
+  <command arg="--screensaver"/>
+  <select id="backend">
+    <option _label="GPU (OpenGL 3.3)" arg-set="--gpu"/>
+    <option _label="CPU (NASM/SSE2)" arg-set="--cpu"/>
+  </select>
+  <_description>Reflective, rotating gold JESUS SAVES text over turbulent fire and a heavenly sky. Every frame is rendered at 3840 x 2160. Written in NASM with an optional OpenGL/GLSL backend.</_description>
+</screensaver>

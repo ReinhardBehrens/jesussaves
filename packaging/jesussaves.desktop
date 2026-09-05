@@ -1,0 +1,18 @@
+[Desktop Entry]
+Type=Application
+Name=Jesus Saves 4K
+Comment=Reflective gold 3D text, a heavenly sky, and turbulent flames
+Exec=jesussaves --gpu
+Icon=preferences-desktop-screensaver
+Terminal=false
+Categories=Graphics;Amusement;
+Keywords=screensaver;flames;4K;Jesus;
+Actions=CPU;Windowed;
+
+[Desktop Action CPU]
+Name=Run with CPU renderer
+Exec=jesussaves --cpu
+
+[Desktop Action Windowed]
+Name=Preview in a window
+Exec=jesussaves --gpu --windowed

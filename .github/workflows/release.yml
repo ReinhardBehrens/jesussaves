@@ -1,0 +1,38 @@
+name: Publish Ubuntu community release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    container: ubuntu:26.04
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      LIBGL_ALWAYS_SOFTWARE: '1'
+    steps:
+      - name: Install build and test dependencies
+        run: |
+          apt-get update
+          apt-get install -y git gh build-essential nasm python3-pil python3-gi libsdl2-2.0-0 libgl1 libegl1 libgl1-mesa-dri libegl-mesa0 libglx-mesa0 xvfb xauth
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Verify version
+        run: test "$GITHUB_REF_NAME" = "v$(cat VERSION)"
+      - run: make -j2
+      - run: make test
+      - run: python3 tests/integration.py
+      - run: xvfb-run -a python3 tests/embedding.py
+      - name: Export package and matching sources
+        run: |
+          python3 scripts/package.py
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git archive --format=tar.gz --prefix=jesussaves-1.0.0/ HEAD > dist/jesussaves-1.0.0-source.tar.gz
+          cd dist
+          sha256sum *.deb *.tar.gz > SHA256SUMS
+      - name: Publish verified downloads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" dist/*.deb dist/*source.tar.gz dist/SHA256SUMS --verify-tag --title "Jesus Saves $GITHUB_REF_NAME" --notes-file docs/RELEASE.md

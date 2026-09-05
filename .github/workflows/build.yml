@@ -1,0 +1,29 @@
+name: Ubuntu build and render tests
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  ubuntu:
+    runs-on: ubuntu-24.04
+    strategy:
+      matrix:
+        release: ['24.04', '26.04']
+    container: ubuntu:${{ matrix.release }}
+    env:
+      DEBIAN_FRONTEND: noninteractive
+      LIBGL_ALWAYS_SOFTWARE: '1'
+    steps:
+      - name: Install build and software graphics dependencies
+        run: |
+          apt-get update
+          apt-get install -y git build-essential nasm python3-pil python3-gi libsdl2-2.0-0 libgl1 libegl1 libgl1-mesa-dri libegl-mesa0 libglx-mesa0 xvfb xauth
+      - uses: actions/checkout@v4
+      - run: make -j2
+      - run: make test
+      - run: python3 tests/integration.py
+      - run: xvfb-run -a python3 tests/embedding.py
+      - run: python3 scripts/package.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jesussaves-ubuntu-${{ matrix.release }}-amd64
+          path: dist/*.deb

@@ -1,0 +1,6 @@
+/build/
+/dist/
+/flame.ppm
+*.o
+__pycache__/
+*.pyc

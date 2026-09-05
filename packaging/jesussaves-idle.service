@@ -1,0 +1,16 @@
+[Unit]
+Description=Jesus Saves 4K idle animation for GNOME
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /usr/share/jesussaves/idle.py
+Environment=JESUSSAVES_IDLE_SECONDS=240
+Environment=JESUSSAVES_BACKEND=gpu
+Restart=on-failure
+RestartSec=15
+TimeoutStopSec=5
+
+[Install]
+WantedBy=graphical-session.target
