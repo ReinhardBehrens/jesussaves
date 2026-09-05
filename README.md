@@ -1,187 +1,130 @@
 <div align="center">
 
-# ✦ JESUS SAVES ✦
-### Light. Hope. Salvation.
+<img src="docs/logo.svg" alt="Jesus Saves gold cross and flame" width="96" height="96">
 
-**A 4K screensaver with reflective gold lettering, living flames, and a heavenly sky.**
+# JESUS SAVES
+### ✦ Light. Hope. Salvation. ✦
 
-[![Ubuntu download](https://img.shields.io/badge/Download-Ubuntu%20.deb-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves_1.1.0_amd64.deb)
-[![Windows download](https://img.shields.io/badge/Download-Windows%2011-0078D4?style=for-the-badge)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves-1.1.0-windows-x64.zip)
-[![Release](https://img.shields.io/github/v/release/ReinhardBehrens/jesussaves?style=for-the-badge&color=c99a36)](https://github.com/ReinhardBehrens/jesussaves/releases/latest)
-[![License](https://img.shields.io/badge/License-GPL%203.0-blue?style=for-the-badge)](LICENSE)
+**Reflective gold. Living flames. A heavenly sky.**<br>
+A free 4K screensaver for Ubuntu and Windows, crafted in NASM assembly.
 
-[**Download**](#download) · [**The Gospel**](#the-gospel-of-jesus-christ) · [**Install**](#install-on-ubuntu) · [**How it works**](docs/ARCHITECTURE.md)
+[![Ubuntu](https://img.shields.io/badge/Download-Ubuntu%20.deb-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves_1.1.1_amd64.deb)
+[![Windows](https://img.shields.io/badge/Download-Windows%2011-0078D4?style=for-the-badge)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves-1.1.1-windows-x64.zip)
+
+[🏠 Home](#jesus-saves) · [📥 Downloads](#downloads) · [🚀 Get started](#start) · [✝️ The Gospel](#gospel) · [👤 Creator](#creator)
+
+[![Release](https://img.shields.io/github/v/release/ReinhardBehrens/jesussaves?color=c99a36&label=Community%20release)](https://github.com/ReinhardBehrens/jesussaves/releases/latest)
+[![License](https://img.shields.io/badge/Open%20source-GPL%203.0-47785c)](LICENSE)
+[![Resolution](https://img.shields.io/badge/Resolution-3840%20%C3%97%202160-596a99)](docs/screenshot-4k.png)
+
+[![Actual screensaver: rotating gold JESUS SAVES lettering, heavenly clouds and turbulent flames](docs/screenshot.png)](docs/screenshot-4k.png)
+
+*An actual rendered frame. Click the image to see it in 4K.*
 
 </div>
 
-Reflective gold **JESUS SAVES** lettering floats and rotates above turbulent flames, against a heavenly cloudscape fading into black. A tribute to the dramatic 3D screensavers of the 1990s, built with **NASM x86-64 assembly**, **SSE2**, and an optional **OpenGL 3.3 / GLSL** renderer.
+<table>
+<tr>
+<td align="center" width="33%"><h3>🔥 Turbulent fire</h3>Random fuel, drifting gusts and flowing heat bring the bottom of the screen to life.</td>
+<td align="center" width="33%"><h3>✨ Reflective gold</h3>Extruded 3D lettering rotates and floats across the sky with moving highlights.</td>
+<td align="center" width="33%"><h3>⚙️ Two renderers</h3>Choose NASM/SSE2 CPU rendering or NASM-controlled OpenGL GPU effects.</td>
+</tr>
+</table>
 
-[Download Ubuntu packages](https://github.com/ReinhardBehrens/jesussaves/releases) · [Algorithms and architecture](docs/ARCHITECTURE.md) · [Rendering hooks](docs/HOOKS.md)
+<a name="downloads"></a>
 
-[![Jesus Saves 4K screensaver — reflective gold lettering, heavenly clouds, and turbulent fire](docs/screenshot.png)](docs/screenshot-4k.png)
+## 📥 Downloads
 
-*Actual GPU-rendered screenshot. Click for the full 3840 × 2160 image.*
+| Platform | Community download | Included |
+| :--- | :--- | :--- |
+| 🐧 **Ubuntu 26.04.1 LTS** | [**Download `.deb`**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves_1.1.1_amd64.deb) | Desktop app, GNOME idle companion, XScreenSaver integration |
+| 🪟 **Windows 11** | [**Download ZIP**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves-1.1.1-windows-x64.zip) | Portable `.exe`, native `.scr`, automatic per-user installer |
+| 🧑‍💻 **Developers** | [**Download source**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves-1.1.1-source.tar.gz) | NASM sources, shaders, artwork, build scripts and tests |
 
-## Download
+**Intel / AMD x64 only.** A 4K monitor is optional: every frame is rendered at 4K and scaled to your display. GPU mode needs OpenGL 3.3; CPU mode is considerably slower at this resolution.
 
-| Community edition | Download |
-|---|---|
-| **Ubuntu 26.04.1 LTS · Intel / AMD 64-bit** | [**Download the `.deb` installer**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves_1.1.0_amd64.deb) |
-| **Windows 11 · Intel / AMD 64-bit** | [**Download the Windows ZIP**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves-1.1.0-windows-x64.zip) · [Checksum](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves-1.1.0-windows-x64.zip.sha256) |
-| Matching source code | [Source archive](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves-1.1.0-source.tar.gz) |
-| Verify your download | [SHA-256 checksums](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/SHA256SUMS) |
+[🔎 Release notes & checksums](https://github.com/ReinhardBehrens/jesussaves/releases/latest) · [📜 GPL license](LICENSE)
 
-Free to download, study, and share under the GPL. The Windows ZIP includes a portable executable, a native `.scr` screensaver, and a per-user installer.
+<a name="start"></a>
 
-## The Gospel of Jesus Christ
+## 🚀 Get started
 
-> “For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.”
->
-> **John 3:16 · King James Version**
+### 🪟 Windows — install, then relax
 
-**The good news is Jesus Christ.** God loves us, yet sin separates us from Him. We cannot earn our salvation through achievements or good works. Jesus, the Son of God, lived without sin, died for our sins, was buried, and rose again on the third day. Through Him, God offers forgiveness, reconciliation, and eternal life.
+1. Download the Windows ZIP and **extract the entire folder**.
+2. Double-click **`install.cmd`**.
+3. The installer **selects Jesus Saves, enables it, and sets a five-minute wait**. Windows Screen Saver Settings opens with that selection ready to review.
 
-- **Our need:** all have sinned and fall short of God's glory — *Romans 3:23*.
-- **God's love:** Christ died for us while we were still sinners — *Romans 5:8*.
-- **Christ's victory:** Jesus died for our sins, was buried, and rose again — *1 Corinthians 15:3–4*.
-- **God's gift:** salvation comes by grace through faith, not by works — *Ephesians 2:8–9*.
-- **Our response:** repent and believe the Gospel; confess Jesus as Lord and believe God raised Him from the dead — *Mark 1:15; Romans 10:9–13*.
+Use **Settings** to choose GPU or CPU rendering. Your existing sign-in requirement is preserved. To choose another default during installation, run `install.cmd -Minutes 10`. Moving the mouse or pressing a key exits screensaver mode.
 
-Turn to Jesus in faith. Speak honestly to Him in prayer, ask His forgiveness, and follow Him. A prayer is not a formula that earns salvation; our trust is in Christ. Read the Gospel of John and seek a Christian church where you can learn the Scriptures, worship, and grow with others.
+**Already have an older version?** Close Jesus Saves, extract the new ZIP, and run its installer again. [Windows guide →](windows/README-Windows.md)
 
-This project shares that message through art. The clouds and flames are an artistic setting, not a claim to depict heaven or the afterlife literally.
-
-## Features
-
-- **3840 × 2160 rendering in both backends**, including when previewed in a smaller window.
-- Extruded, bevelled 3D lettering, full horizontal rotation, gentle rocking, and independent drifting motion.
-- Reflective gold shading, moving highlights, and warm fire reflections.
-- Continuous turbulent heat transport, random gusts, and irregular fuel. GPU mode adds fine animated flame sheets and dark pockets at output resolution.
-- Two complete rendering paths: **CPU flames + CPU text**, or **CPU heat simulation + GPU flames and text**.
-- GNOME/Wayland idle companion for current Ubuntu, plus native-window integration for XScreenSaver on X11.
-- Deterministic 4K snapshots, a background export, and documented assembly entry points.
-
-## Install on Ubuntu
-
-The release target is **Ubuntu 26.04.1 LTS, amd64**. The project is built and exercised on that release. Source CI also covers Ubuntu 24.04. Other architectures are not supported by this x86-64 assembly implementation.
-
-Download the `.deb` from [Releases](https://github.com/ReinhardBehrens/jesussaves/releases), then:
+### 🐧 Ubuntu — install and launch
 
 ```bash
-sudo apt install ./jesussaves_1.1.0_amd64.deb
+sudo apt install ./jesussaves_1.1.1_amd64.deb
 jesussaves --gpu
 ```
 
-Use **Escape** to exit. “Jesus Saves 4K” is also available in the applications menu. A 4K monitor is not required: the finished 4K frame is scaled to the window or display.
-
-```bash
-jesussaves --cpu                 # complete CPU renderer; no GPU shading
-jesussaves --gpu --windowed      # smaller preview window, still a 4K render
-```
-
-| Backend | Flame rendering | Gold text | Requirements / tradeoff |
-|---|---|---|---|
-| `--gpu` (default) | SSE2 heat simulation; procedural GLSL emission and detail | GPU distance-field ray tracing | OpenGL 3.3; preferred for smooth 4K animation |
-| `--cpu` | SSE2 heat transport, density modulation, RGB conversion and compositing | NASM/SSE2 distance-field ray tracing | Any x86-64 CPU; considerably slower at 4K; different fine flame detail |
-
-The GPU is controlled through NASM bindings. GPU kernels are GLSL, compiled by the graphics driver; NASM does not assemble AMD or NVIDIA GPU instructions. Both AMD and Intel x86-64 CPUs are supported. GPU mode uses standard OpenGL rather than a vendor-specific API.
-
-## Make it your screensaver
-
-### Ubuntu GNOME / Wayland
-
-Enable the optional per-user idle companion:
+Press **Escape** to exit. For automatic idle activation on Ubuntu GNOME:
 
 ```bash
 systemctl --user daemon-reload
 systemctl --user enable --now jesussaves-idle.service
 ```
 
-It starts the animation after **four minutes of inactivity**, stops it when you return, and stops it when GNOME's lock screen becomes active. **GNOME continues to handle locking and passwords.** This is an idle animation, not a replacement lock screen, and it does not change your existing lock or display-blanking settings. If GNOME blanks/locks earlier than four minutes, choose a shorter animation timeout.
+The animation starts after four minutes of inactivity; GNOME retains control of locking. [Ubuntu setup, XScreenSaver and customization →](docs/GUIDE.md)
 
-To change the delay or select the CPU backend:
+<a name="gospel"></a>
 
-```bash
-systemctl --user edit jesussaves-idle.service
-```
+## ✝️ The Gospel of Jesus Christ
 
-```ini
-[Service]
-Environment=JESUSSAVES_IDLE_SECONDS=120
-Environment=JESUSSAVES_BACKEND=cpu
-```
+> “For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.”
+>
+> **John 3:16 · King James Version**
 
-Then run `systemctl --user restart jesussaves-idle.service`. To disable the companion:
+**The good news is Jesus Christ.** God loves us, yet sin separates us from Him. We cannot earn salvation through achievements or good works. Jesus, the Son of God, lived without sin, died for our sins, was buried, and rose again on the third day. Through Him, God offers forgiveness, reconciliation, and eternal life.
 
-```bash
-systemctl --user disable --now jesussaves-idle.service
-```
+| | The message | Scripture |
+| :---: | :--- | :--- |
+| 🤍 | **Our need:** all have sinned and fall short of God's glory. | Romans 3:23 |
+| ✝️ | **God's love:** Christ died for us while we were still sinners. | Romans 5:8 |
+| 🌅 | **Christ's victory:** Jesus died for our sins, was buried, and rose again. | 1 Corinthians 15:3–4 |
+| 🎁 | **God's gift:** salvation comes by grace through faith, not by works. | Ephesians 2:8–9 |
+| 🙏 | **Our response:** repent, believe the Gospel, and confess Jesus as Lord. | Mark 1:15; Romans 10:9–13 |
 
-The companion requires GNOME's Mutter idle-monitor and ScreenSaver D-Bus interfaces. Other Wayland compositors can run the animation directly but need their own idle integration. SDL's normal screensaver inhibition is explicitly disabled so this app does not keep the session unlocked.
+Turn to Jesus in faith. Speak honestly to Him in prayer, ask His forgiveness, and follow Him. A prayer is not a formula that earns salvation; our trust is in Christ. Read the Gospel of John and seek a Christian church where you can learn the Scriptures, worship, and grow with others.
 
-### XScreenSaver / X11 sessions
+*This project shares that message through art. The clouds and flames are an artistic setting, not a claim to depict heaven or the afterlife literally.*
 
-```bash
-sudo apt install xscreensaver
-jesussaves-register
-xscreensaver-settings
-```
+## 🛠️ Inside the project
 
-Select **Jesus Saves 4K**. On older XScreenSaver releases, the settings command may be `xscreensaver-demo`. Registration backs up an existing `~/.xscreensaver` and preserves its timeout and lock settings. Do not run competing screen-locking daemons in the same session.
+| Explore | What you will find |
+| :--- | :--- |
+| [📖 User guide](docs/GUIDE.md) | Controls, idle activation, configuration, building and snapshots |
+| [🧠 Rendering algorithms](docs/ARCHITECTURE.md) | Heat transport, turbulence, distance fields, reflections and performance |
+| [🔌 NASM hooks](docs/HOOKS.md) | CPU/GPU interfaces and shared assembly entry points |
+| [🪟 Windows build](windows/BUILD.md) | Cross-compilation, runtime packaging and native tests |
+| [🎨 Artwork provenance](docs/ASSETS.md) | Background generation, upscaling and font attribution |
 
-The module accepts `XSCREENSAVER_WINDOW` and `--window-id 0xID`; it draws into the host's existing window instead of opening a second fullscreen window. `--screensaver` requires a host window. The package installs an XScreenSaver configuration panel with CPU/GPU selection.
+**How it is coded:** NASM supplies the heat simulation, CPU flame/text rendering and GPU host hooks. GLSL runs the GPU effects. Windows uses a small C layer for calling conventions and desktop integration. Python packs assets, supplies Ubuntu integration, and runs tests.
 
-## Windows 11 x64
+**Test coverage:** 4K CPU/GPU output, animation, window embedding and desktop integration. Windows tests run on Windows Server 2025 with Mesa software OpenGL; physical Windows 11 GPU testing remains outstanding. Windows binaries are unsigned. The background is upscaled from a generated image; final rendering and lettering are computed at 4K.
 
-The Windows edition includes **JesusSaves.exe**, a native **JesusSaves.scr** screensaver, and the SDL2 runtime. Extract the complete Windows ZIP from [Releases](https://github.com/ReinhardBehrens/jesussaves/releases), then run `install.cmd`. It installs for your user account and opens Windows Screen Saver Settings. Choose your wait time and sign-in preference, then click **Apply**.
+<a name="creator"></a>
 
-Use **Settings** to select GPU or CPU rendering. Moving the mouse or pressing a key dismisses screensaver mode. The small Windows preview uses CPU rendering; the fullscreen saver uses your saved choice. Portable mode exits with Escape. The saver uses the primary display.
+## 👤 Meet the creator
 
-```powershell
-.\JesusSaves.exe --gpu --windowed
-.\JesusSaves.exe --cpu --windowed
-.\JesusSaves.scr /c
-.\JesusSaves.scr /s
-```
+<table>
+<tr>
+<td width="100" align="center"><a href="https://github.com/ReinhardBehrens"><img src="https://github.com/ReinhardBehrens.png?size=160" alt="Reinhard Behrens GitHub avatar" width="80" height="80"></a></td>
+<td><strong>Reinhard Behrens</strong><br>Creator of the Jesus Saves screensaver.<br><a href="https://github.com/ReinhardBehrens">👤 GitHub profile</a> · <a href="https://github.com/ReinhardBehrens/jesussaves/issues">💬 Report a problem or suggest an improvement</a></td>
+</tr>
+</table>
 
-Windows requires an Intel/AMD x64 CPU; GPU mode requires an OpenGL 3.3 driver. The community binaries are unsigned. Native CI runs on Windows Server 2025 with Mesa software OpenGL; physical Windows 11 GPU testing has not been performed. [Windows installation and removal](windows/README-Windows.md) · [Windows build instructions](windows/BUILD.md).
+<div align="center">
 
-## Build from source
+**Made to share. Free to use. Open to contributions.**<br>
+[⭐ Visit the repository](https://github.com/ReinhardBehrens/jesussaves) · [📥 Get the latest release](https://github.com/ReinhardBehrens/jesussaves/releases/latest)
 
-```bash
-sudo apt install build-essential nasm python3-pil python3-gi \
-    libsdl2-2.0-0 libgl1 libegl1
-
-git clone https://github.com/ReinhardBehrens/jesussaves.git
-cd jesussaves
-make -j2
-./build/jesussaves --gpu
-```
-
-GCC is used to **link** the NASM object files with system libraries. There is no C/C++ renderer. Python only packs assets during the build and supplies optional desktop integration and tests. With dependencies installed, no font download, API key, or internet access is needed to build or run. Windows uses a small C platform layer to bridge calling conventions and integrate with Screen Saver Settings; rendering stays in NASM and GLSL.
-
-`make install` installs under `~/.local`. This does not automatically enable idle activation. Use `~/.local/bin/jesussaves-register --binary ~/.local/bin/jesussaves` for a user-installed XScreenSaver entry. Stop the idle service before `make uninstall`.
-
-## Export and test
-
-```bash
-./build/jesussaves --gpu --snapshot        # writes flame.ppm at 3840 × 2160
-./build/jesussaves --cpu --snapshot
-./build/jesussaves --background            # 4K background without text/fire
-FLAME_TIME=9 ./build/jesussaves --snapshot  # a particular animation pose
-FLAME_FRAMES=120 ./build/jesussaves --gpu --windowed
-
-make test
-python3 tests/embedding.py                 # requires a working X11 display
-python3 scripts/package.py                # dist/jesussaves_1.1.0_amd64.deb
-```
-
-GPU snapshots use an EGL surfaceless context; CPU snapshots do not need a display. A software OpenGL driver can also run GPU tests with `LIBGL_ALWAYS_SOFTWARE=1`. Snapshots use a fixed seed; live runs seed the gust generator from the performance counter. `FLAME_TIME` is clamped to 0–60 seconds for bounded snapshot generation.
-
-Validated on Ubuntu 26.04.1: both renderers, exact 4K output, animation bounds across multiple rotations, changing flame patterns, native X11 embedding, CLI errors, registration/install behavior, and idle/lock lifecycle logic. The GNOME D-Bus interfaces were checked in a live session; automated lifecycle tests cover launch suppression while locked and stopping on activity/lock. See [architecture notes](docs/ARCHITECTURE.md) for performance limits and source research.
-
-## Artwork and licensing
-
-Code uses the repository's **GPL-3.0** license. The embedded DejaVu-derived lettering retains the [DejaVu font notice](licenses/DejaVu.txt).
-
-The background was created with OpenAI's built-in image generator and exported to a 4K asset. The generator returned a 1672 × 941 source; the 3840 × 2160 background is an upscale. Text and final rendering are computed at 4K. The heat simulation is deliberately lower resolution, with GPU procedural detail evaluated at final resolution. [Asset provenance and prompts](docs/ASSETS.md) document this distinction.
+</div>

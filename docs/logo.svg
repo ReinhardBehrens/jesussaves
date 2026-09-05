@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128" role="img" aria-label="Jesus Saves: gold cross and flame">
+ <defs>
+  <linearGradient id="gold" x2="1" y2="1"><stop stop-color="#fff0b5"/><stop offset=".5" stop-color="#e4ba57"/><stop offset="1" stop-color="#a37124"/></linearGradient>
+  <linearGradient id="fire" x2="0" y2="1"><stop stop-color="#ffd57a"/><stop offset="1" stop-color="#db511f"/></linearGradient>
+ </defs>
+ <rect x="2" y="2" width="124" height="124" rx="28" fill="#10131b" stroke="#b68b3d" stroke-width="2"/>
+ <path d="M58 23h12v22h20v12H70v36H58V57H38V45h20z" fill="url(#gold)"/>
+ <path d="M34 102c-9-12-7-23 1-35-1 13 9 15 7 25 4-5 5-10 5-15 12 12 8 22 17 28 9-6 5-16 17-28 0 5 1 10 5 15-2-10 8-12 7-25 8 12 10 23 1 35-14 12-46 12-60 0z" fill="url(#fire)"/>
+</svg>

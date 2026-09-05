@@ -7,12 +7,12 @@ Both rendering paths produce a 3840 x 2160 frame. Intel and AMD x64 CPUs support
 
 1. Extract the entire ZIP to a folder. Keep SDL2.dll beside the executable.
 2. Double-click install.cmd. It copies the program into your own
-   %LOCALAPPDATA%\JesusSaves folder and opens Windows Screen Saver Settings.
-3. Select JesusSaves, choose the wait time and your sign-in preference, and Apply.
+   %LOCALAPPDATA%\JesusSaves folder, selects Jesus Saves, enables it with a five-minute wait, and opens Windows Screen Saver Settings.
+3. Jesus Saves is already selected and enabled with a five-minute wait. Adjust the wait time if desired, then Apply.
 4. Use Settings to choose GPU (recommended) or CPU rendering.
 
 No administrator access is needed. Windows owns the lock screen and passwords.
-The installer does not silently change your locking policy. The screensaver
+The installer preserves your existing sign-in requirement. To set another wait during installation, run install.cmd -Minutes 10. The screensaver
 exits when you move the mouse or press a key. It uses the primary display.
 
 This community build is unsigned; Windows may show an unknown-publisher prompt.
