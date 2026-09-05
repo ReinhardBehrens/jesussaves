@@ -16,7 +16,7 @@ for source in sorted(out.glob('*.asm')):
 for source in [out/'bridges.c',root/'windows/platform.c']:
     obj=out/(source.stem+'.o')
     run([cc,*flags,'-O2','-fno-omit-frame-pointer','-Wall','-Wextra','-Werror','-mno-red-zone','-maccumulate-outgoing-args','-Iwindows','-I'+str(sdl/'include/SDL2'),'-c',source,'-o',obj]);objects.append(obj)
-run([windres,'--preprocessor='+cc,*[f for f in flags if f.startswith('-I')],'-i','windows/settings.rc','-o',out/'settings.o']);objects.append(out/'settings.o')
+run([windres,'--preprocessor='+cc,'--preprocessor-arg=-E','--preprocessor-arg=-xc','--preprocessor-arg=-DRC_INVOKED',*[f for f in flags if f.startswith('-I')],'-i','windows/settings.rc','-o',out/'settings.o']);objects.append(out/'settings.o')
 run([cc,*flags,'-static-libgcc','-mwindows','-o',out/'JesusSaves.exe',*objects,'-L'+str(sdl/'lib'),'-lSDL2','-luser32','-ladvapi32','-lgdi32','-lm'])
 shutil.copy2(out/'JesusSaves.exe',out/'JesusSaves.scr')
 shutil.copy2(sdl/'bin/SDL2.dll',out/'SDL2.dll')
