@@ -12,11 +12,20 @@ exe=app/'Contents/MacOS/jesussaves'
 def run(args, **kwargs):
     kwargs.setdefault('timeout', 30)
     print('::notice::Checking ' + ' '.join(str(x) for x in args), flush=True)
+    timeout = kwargs.pop('timeout')
+    proc = subprocess.Popen([str(x) for x in args], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, **kwargs)
     try:
-        result=subprocess.run([str(x) for x in args],capture_output=True,text=True,**kwargs)
+        stdout, stderr = proc.communicate(timeout=timeout)
     except subprocess.TimeoutExpired:
-        print('::error::Timed out running ' + ' '.join(str(x) for x in args))
-        raise
+        report = Path(tempfile.gettempdir()) / ('jesussaves-sample-' + str(proc.pid) + '.txt')
+        subprocess.run(['sample', str(proc.pid), '1', '1', '-file', str(report)], capture_output=True, timeout=15)
+        proc.kill()
+        stdout, stderr = proc.communicate()
+        message = 'Timed out running ' + ' '.join(str(x) for x in args) + '\n' + stderr
+        if report.exists(): message += '\n' + report.read_text()[:10000]
+        print('::error::' + message.replace('%','%25').replace('\r','%0D').replace('\n','%0A'), flush=True)
+        raise RuntimeError('Process timed out')
+    result = subprocess.CompletedProcess(args, proc.returncode, stdout, stderr)
     if result.returncode:
         message=(result.stdout+result.stderr).replace('%','%25').replace('\r','%0D').replace('\n','%0A')
         print('::error::'+message)
