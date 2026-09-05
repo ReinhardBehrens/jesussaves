@@ -1,6 +1,6 @@
 <div align="center">
 
-<a href="docs/logo-3d-transparent.png"><img src="docs/logo-3d-transparent.png" alt="3D Jesus Saves icon: reflective gold cross, flames and heavenly clouds" width="400"></a>
+<a href="docs/logo-3d-transparent.png"><img src="docs/logo-3d-transparent.png" alt="3D Jesus Saves icon: reflective gold cross, flames and heavenly clouds" width="180"></a>
 
 # JESUS SAVES
 ### ✦ Light. Hope. Salvation. ✦

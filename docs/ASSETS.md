@@ -25,7 +25,7 @@ The tool still returned a smaller image. The application therefore performs the 
 
 ## 3D README icon
 
-`docs/logo-3d-transparent.png` is the final built-in image-generation edit, **1254 × 1254 pixels**, with an alpha-transparent background outside the gold frame. It is displayed at 400 pixels wide in the README. The original landscape outputs were 1672 × 941 pixels despite requests for 3840 × 2160. This file is therefore not labelled as a native 4K asset. The previous vector icon remains at `docs/logo.svg`.
+`docs/logo-3d-transparent.png` is the final built-in image-generation edit, **1254 × 1254 pixels**, with an alpha-transparent background outside the gold frame. It is displayed at 180 pixels wide in the README. The original landscape outputs were 1672 × 941 pixels despite requests for 3840 × 2160. This file is therefore not labelled as a native 4K asset. The previous vector icon remains at `docs/logo.svg`.
 
 Generation used the built-in tool, not the CLI/API fallback. Final prompt sequence:
 
