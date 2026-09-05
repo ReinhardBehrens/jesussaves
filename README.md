@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/logo.svg" alt="Jesus Saves gold cross and flame" width="96" height="96">
+<a href="docs/logo-3d.png"><img src="docs/logo-3d.png" alt="3D Jesus Saves icon: reflective gold cross, flames and heavenly clouds" width="400"></a>
 
 # JESUS SAVES
 ### ✦ Light. Hope. Salvation. ✦
@@ -8,8 +8,8 @@
 **Reflective gold. Living flames. A heavenly sky.**<br>
 A free 4K screensaver for Ubuntu and Windows, crafted in NASM assembly.
 
-[![Ubuntu](https://img.shields.io/badge/Download-Ubuntu%20.deb-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves_1.1.1_amd64.deb)
-[![Windows](https://img.shields.io/badge/Download-Windows%2011-0078D4?style=for-the-badge)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves-1.1.1-windows-x64.zip)
+[![Ubuntu](docs/brand/download-ubuntu.svg)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves_1.1.1_amd64.deb)
+[![Windows](docs/brand/download-windows.svg)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves-1.1.1-windows-x64.zip)
 
 [🏠 Home](#jesus-saves) · [📥 Downloads](#downloads) · [🚀 Get started](#start) · [✝️ The Gospel](#gospel) · [👤 Creator](#creator)
 
@@ -37,8 +37,8 @@ A free 4K screensaver for Ubuntu and Windows, crafted in NASM assembly.
 
 | Platform | Community download | Included |
 | :--- | :--- | :--- |
-| 🐧 **Ubuntu 26.04.1 LTS** | [**Download `.deb`**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves_1.1.1_amd64.deb) | Desktop app, GNOME idle companion, XScreenSaver integration |
-| 🪟 **Windows 11** | [**Download ZIP**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves-1.1.1-windows-x64.zip) | Portable `.exe`, native `.scr`, automatic per-user installer |
+| <img src="docs/brand/ubuntu.svg" alt="Ubuntu" width="24"> **Ubuntu 26.04.1 LTS** | [**Download `.deb`**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves_1.1.1_amd64.deb) | Desktop app, GNOME idle companion, XScreenSaver integration |
+| <img src="docs/brand/windows.svg" alt="Windows" width="24"> **Windows 11** | [**Download ZIP**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves-1.1.1-windows-x64.zip) | Portable `.exe`, native `.scr`, automatic per-user installer |
 | 🧑‍💻 **Developers** | [**Download source**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.1/jesussaves-1.1.1-source.tar.gz) | NASM sources, shaders, artwork, build scripts and tests |
 
 **Intel / AMD x64 only.** A 4K monitor is optional: every frame is rendered at 4K and scaled to your display. GPU mode needs OpenGL 3.3; CPU mode is considerably slower at this resolution.
@@ -49,7 +49,7 @@ A free 4K screensaver for Ubuntu and Windows, crafted in NASM assembly.
 
 ## 🚀 Get started
 
-### 🪟 Windows — install, then relax
+### <img src="docs/brand/windows.svg" alt="" width="24"> Windows — install, then relax
 
 1. Download the Windows ZIP and **extract the entire folder**.
 2. Double-click **`install.cmd`**.
@@ -59,7 +59,7 @@ Use **Settings** to choose GPU or CPU rendering. Your existing sign-in requireme
 
 **Already have an older version?** Close Jesus Saves, extract the new ZIP, and run its installer again. [Windows guide →](windows/README-Windows.md)
 
-### 🐧 Ubuntu — install and launch
+### <img src="docs/brand/ubuntu.svg" alt="" width="24"> Ubuntu — install and launch
 
 ```bash
 sudo apt install ./jesussaves_1.1.1_amd64.deb
@@ -104,7 +104,7 @@ Turn to Jesus in faith. Speak honestly to Him in prayer, ask His forgiveness, an
 | [📖 User guide](docs/GUIDE.md) | Controls, idle activation, configuration, building and snapshots |
 | [🧠 Rendering algorithms](docs/ARCHITECTURE.md) | Heat transport, turbulence, distance fields, reflections and performance |
 | [🔌 NASM hooks](docs/HOOKS.md) | CPU/GPU interfaces and shared assembly entry points |
-| [🪟 Windows build](windows/BUILD.md) | Cross-compilation, runtime packaging and native tests |
+| [<img src="docs/brand/windows.svg" alt="" width="18"> Windows build](windows/BUILD.md) | Cross-compilation, runtime packaging and native tests |
 | [🎨 Artwork provenance](docs/ASSETS.md) | Background generation, upscaling and font attribution |
 
 **How it is coded:** NASM supplies the heat simulation, CPU flame/text rendering and GPU host hooks. GLSL runs the GPU effects. Windows uses a small C layer for calling conventions and desktop integration. Python packs assets, supplies Ubuntu integration, and runs tests.

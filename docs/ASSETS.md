@@ -22,3 +22,19 @@ Upscale this exact background to 3840x2160 pixels, 4K UHD landscape 16:9. Preser
 ```
 
 The tool still returned a smaller image. The application therefore performs the documented 4K export. The original composition is retained. CPU and GPU text are calculated at final render resolution; their sharpness does not depend on the background's source resolution.
+
+## 3D README icon
+
+`docs/logo-3d.png` is the selected built-in image-generation output, **1672 × 941 pixels**. It is displayed at 400 pixels wide in the README. A native 3840 × 2160 image was requested twice, but the image tool returned the smaller dimensions both times. This file is therefore not labelled as a native 4K asset. The previous vector icon remains at `docs/logo.svg`.
+
+Generation used the built-in tool, not the CLI/API fallback. Final prompt sequence:
+
+```text
+Create the final premium 3D application emblem for the JESUS SAVES open-source screensaver. Output a high-definition 4K image, exactly 3840 x 2160 pixels (landscape). The artwork is a single centered substantial square app-icon medallion, with generous empty dark space on either side, not a landscape illustration. The icon: a thick, beautifully bevelled polished 24-karat gold Christian cross, standing within a rounded-square deep midnight obsidian plaque with finely machined gold rim. Realistic irregular orange-gold flames curl around the base, delicate heavenly clouds and a restrained shaft of warm light behind the upper cross. Physically based 3D product rendering, ray-traced gold reflections, beautifully resolved bevels, subtle brushed-metal microtexture, dramatic studio lighting, crisp silhouette that stays readable at 180px, rich contrast, tasteful and reverent. Very subtle perspective showing the thickness of the plaque and cross, front view mostly straight-on. Background outside the plaque is uniform midnight navy #0d1117, integrated cleanly without text or decoration. No words, no lettering, no watermark, no people, no extra crosses, no platform logos. Make the icon itself occupy approximately 78% of the image height, centrally balanced. This is the actual icon artwork, not a website mockup. Highest detail and polish. Please return the image at exactly 3840 by 2160 pixels.
+```
+
+```text
+Resolution-only enhancement of this exact icon. Preserve the composition, cross, gold plaque, flames, lighting and background without redesign. Export the actual output file at exactly 3840 x 2160 pixels, 4K UHD, not 1672 x 941. Refine the gold bevel and flame detail for this resolution. No text or new elements. The required deliverable is a 3840 by 2160 pixel PNG.
+```
+
+Platform logo sources and attribution: [brand assets](brand/README.md).
