@@ -6,6 +6,11 @@ from pathlib import Path
 import gi
 gi.require_version('Gio','2.0')
 from gi.repository import Gio, GLib
+try:
+    from gi.repository import GLibUnix
+    add_unix_signal=GLibUnix.signal_add
+except ImportError:  # GLib shipped by older Ubuntu releases
+    add_unix_signal=GLib.unix_signal_add
 
 class IdleSaver:
     def __init__(self, binary, backend, seconds):
@@ -53,8 +58,8 @@ class IdleSaver:
         self.idle_watch=self.call(self.idle,'AddIdleWatch',GLib.Variant('(t)',(self.seconds*1000,)))[0]
         loop=GLib.MainLoop()
         def quit_loop(*_):self.stop();loop.quit();return False
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT,signal.SIGTERM,quit_loop)
-        GLib.unix_signal_add(GLib.PRIORITY_DEFAULT,signal.SIGINT,quit_loop)
+        add_unix_signal(GLib.PRIORITY_DEFAULT,signal.SIGTERM,quit_loop)
+        add_unix_signal(GLib.PRIORITY_DEFAULT,signal.SIGINT,quit_loop)
         logging.info('Watching for %s seconds of idle time; GNOME lock remains in control',self.seconds)
         try:loop.run()
         finally:self.stop()
