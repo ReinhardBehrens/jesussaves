@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 #include <SDL.h>
+#include <stdlib.h>
 extern void gpu_configure(void);
 extern int gpu_init(SDL_Window *);
 static SDL_Window *snapshot_window;

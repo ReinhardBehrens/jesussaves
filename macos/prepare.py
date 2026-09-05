@@ -20,7 +20,6 @@ for source in (root / 'src').glob('*.asm'):
         # macOS exposes core 3.2 / 4.1, with a forward-compatible context.
         s = s.replace('mov edi,17\n    mov esi,3', 'mov edi,17\n    mov esi,4')
         s = s.replace('mov edi,18\n    mov esi,3', 'mov edi,18\n    mov esi,1')
-        s = s.replace('global gpu_configure', 'global gpu_configure')
         s = s.replace('gpu_configure:\n    sub rsp,8',
                       'gpu_configure:\n    sub rsp,8\n    mov edi,20\n    mov esi,2\n    call SDL_GL_SetAttribute')
     # Prefix public C and cross-object symbols; local labels remain unchanged.

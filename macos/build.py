@@ -44,6 +44,8 @@ with (contents / 'Info.plist').open('wb') as f:
                       CFBundleVersion=(root / 'VERSION').read_text().strip(),
                       LSMinimumSystemVersion='12.0', NSHighResolutionCapable=True), f)
 shutil.copy2(root / 'LICENSE', contents / 'LICENSE')
+shutil.copytree(root / 'licenses', contents / 'licenses', dirs_exist_ok=True)
+shutil.copy2(root / 'macos/README.md', contents / 'README.md')
 run(['codesign', '--force', '--deep', '--sign', '-', app])
 (root / 'dist').mkdir(exist_ok=True)
 run(['ditto', '-c', '-k', '--sequesterRsrc', '--keepParent', app,
