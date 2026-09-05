@@ -10,6 +10,8 @@ for source in (root / 'src').glob('*.asm'):
     s = re.sub(r'section \.note\.GNU-stack[^\n]*', '', s)
     s = s.replace('section .rodata', 'section __TEXT,__const')
     s = re.sub(r'\bstderr\b', 'mac_stderr', s)
+    if source.name == 'main.asm':
+        s = re.sub(r'\.check_saver:.*?\.bad_id:', '.check_saver:\n    jmp .Linit\n.bad_id:', s, flags=re.S)
     if source.name == 'gpu.asm':
         s = re.sub(r'^extern egl\w+\n', '', s, flags=re.M)
         s = re.sub(r'gpu_headless:.*?; Compile one stage',

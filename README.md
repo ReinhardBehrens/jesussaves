@@ -137,4 +137,3 @@ Turn to Jesus in faith. Speak honestly to Him in prayer, ask His forgiveness, an
 [⭐ Visit the repository](https://github.com/ReinhardBehrens/jesussaves) · [📥 Get the latest release](https://github.com/ReinhardBehrens/jesussaves/releases/latest)
 
 </div>
-
