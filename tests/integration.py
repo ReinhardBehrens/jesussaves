@@ -1,7 +1,13 @@
 #!/usr/bin/python3
 """Registration/install preservation and idle/lock lifecycle checks."""
 import importlib.util,subprocess,tempfile,unittest.mock as mock
+import sys,traceback
 from pathlib import Path
+def report_exception(kind,value,tb):
+    message="".join(traceback.format_exception(kind,value,tb)).replace("%","%25").replace("\n","%0A").replace("\r","%0D")
+    print("::error::"+message,flush=True)
+    sys.__excepthook__(kind,value,tb)
+sys.excepthook=report_exception
 ROOT=Path(__file__).resolve().parents[1]
 def load(name,file):
     spec=importlib.util.spec_from_file_location(name,ROOT/file);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m);return m

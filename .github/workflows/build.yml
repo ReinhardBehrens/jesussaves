@@ -6,6 +6,7 @@ jobs:
   ubuntu:
     runs-on: ubuntu-24.04
     strategy:
+      fail-fast: false
       matrix:
         release: ['24.04', '26.04']
     container: ubuntu:${{ matrix.release }}
