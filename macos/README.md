@@ -1,10 +1,17 @@
-# macOS build
+# macOS builds
 
-The Intel macOS port builds the shared NASM CPU and GPU renderers into a standalone `Jesus Saves.app`. The GitHub Actions **macOS Intel build** workflow produces `jesussaves-macos-intel.zip`. This is an application, not yet a `.saver` plug-in registered in macOS Screen Saver settings.
+Two standalone applications are built for macOS 14 Sonoma and later:
+
+| Build | CPU heat simulation | Final flames and 3D text | Rosetta |
+|---|---|---|---|
+| Apple Silicon ARM64 | Native ARM NEON | Shared OpenGL shaders at 3840 × 2160 | Not required |
+| Intel x86-64 | Shared NASM SSE2 | NASM CPU renderer or shared OpenGL shaders at 3840 × 2160 | Only when running this Intel build on Apple Silicon |
+
+Download the matching ZIP artifact from a successful [macOS build workflow](https://github.com/ReinhardBehrens/jesussaves/actions/workflows/macos.yml), unzip, and move **Jesus Saves.app** to Applications. These are standalone apps, not `.saver` plug-ins registered in macOS Screen Saver settings. Idle activation is not yet included.
 
 ## Build
 
-On an Intel Mac with Xcode Command Line Tools and Homebrew:
+On the target Mac with Xcode Command Line Tools and Homebrew:
 
 ```sh
 brew install nasm sdl2
@@ -15,14 +22,25 @@ python3 macos/build.py
 open 'build/macos/Jesus Saves.app'
 ```
 
-The ZIP includes SDL2. The build uses an ad-hoc signature, not an Apple Developer ID signature or notarization. macOS may require approval in Privacy & Security when opening a downloaded copy.
+The script chooses the host architecture, bundles SDL2 and the required assets and licenses, and writes `dist/jesussaves-macos-intel.zip` or `dist/jesussaves-macos-arm64.zip`. The signature is ad-hoc, not Apple Developer ID or notarized. macOS may require approval in Privacy & Security when opening a downloaded copy.
 
-The default launch uses the GPU; run `build/macos/jesussaves --cpu` for NASM CPU rendering or add `--window` for a windowed preview. Escape quits. `--cpu --snapshot` writes a 3840 × 2160 `flame.ppm`.
+Default launch is full screen with GPU rendering. Escape quits. Launch the executable inside the bundle with `--windowed` for a window or `--screensaver` to quit on user input. `--gpu --snapshot` writes a 3840 × 2160 `flame.ppm`. The Intel build additionally supports `--cpu`; ARM64 does not include a software-only final renderer.
 
-## Compatibility and implementation
+## Optional Rosetta
 
-- Intel x86-64 only. Apple Silicon requires Rosetta; native ARM64 is not implemented or tested. Apple documents general Rosetta support through macOS 27: https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment
-- `prepare.py` changes object format, public symbol prefixes and macOS's stderr symbol. Rendering code remains shared with Ubuntu and Windows.
-- macOS uses a forward-compatible OpenGL 4.1 core context for the existing GLSL shaders. Snapshot rendering uses a hidden SDL Cocoa window instead of Linux EGL.
-- No Linux XScreenSaver embedding support on macOS. Automatic idle activation and a native `.saver` plug-in remain future work.
-- The CI workflow assembles and links on macOS and checks the CPU 4K snapshot and application signature. GPU behavior and Apple Silicon compatibility require testing on actual Macs.
+Use the ARM64 download on Apple Silicon; it runs natively. Rosetta is only needed to run the Intel version on Apple Silicon. Apple provides it through macOS, not as a redistributable file in this repository.
+
+On an Apple Silicon Mac, open an Intel app and accept Apple's Rosetta prompt, or run:
+
+```sh
+/usr/sbin/softwareupdate --install-rosetta
+```
+
+This downloads Rosetta from Apple and presents its license. The optional `macos/install-rosetta.command` helper checks the host first and invokes that command. Rosetta cannot be installed on Ubuntu or Windows. See [Apple's installation guidance](https://support.apple.com/102527) and [Rosetta support lifetime](https://developer.apple.com/documentation/apple-silicon/about-the-rosetta-translation-environment).
+
+## Implementation and validation
+
+- Intel: `prepare.py` converts NASM object format and symbols to Mach-O. A local C stderr pointer avoids dynamic data relocations; rendering algorithms remain shared.
+- ARM64: `arm64.c` implements the original scrolling turbulence, interpolated heat advection, fuel blending and cooling using NEON intrinsics. NASM cannot generate ARM instructions. Gold SDF ray marching, reflection, flame detail and heaven imagery use the same assets and GLSL as the Intel and Ubuntu GPU renderer.
+- Both use a forward-compatible OpenGL 4.1 core context; snapshots use hidden SDL Cocoa windows instead of Linux EGL.
+- CI builds each architecture on a matching Mac runner and tests the bundled app, its signature, 4K output and animation. Intel checks the CPU renderer; ARM checks the GPU renderer. There is no claim of physical-monitor or System Settings integration testing.

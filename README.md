@@ -129,6 +129,6 @@ Turn to Jesus in faith. Speak honestly to Him in prayer, ask His forgiveness, an
 
 </div>
 
-### macOS preview build
+### macOS preview builds
 
-An Intel Mac application build is available through the [macOS build workflow](https://github.com/ReinhardBehrens/jesussaves/actions/workflows/macos.yml). See [build instructions and compatibility](macos/README.md). This is a standalone app; macOS Screen Saver settings integration and native Apple Silicon support are not yet included.
+Native **Apple Silicon (ARM64)** and **Intel** application builds are available through the [macOS build workflow](https://github.com/ReinhardBehrens/jesussaves/actions/workflows/macos.yml). The ARM64 build does not need Rosetta. See [downloads, build instructions and compatibility](macos/README.md). These are standalone apps; macOS Screen Saver settings integration is not yet included.

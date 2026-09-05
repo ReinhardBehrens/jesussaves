@@ -1,6 +1,9 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 #include <SDL.h>
 #include <stdlib.h>
+#include <stdio.h>
+FILE *mac_stderr;
+__attribute__((constructor)) static void init_stderr(void) { mac_stderr = stderr; }
 extern void gpu_configure(void);
 extern int gpu_init(SDL_Window *);
 static SDL_Window *snapshot_window;

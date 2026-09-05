@@ -36,7 +36,7 @@ if arch == 'x86_64':
 sdl_flags = shlex.split(subprocess.check_output(['sdl2-config', '--cflags', '--libs'], text=True))
 source = 'macos/platform.c' if arch == 'x86_64' else 'macos/arm64.c'
 link_flags = ['-Wl,-no_pie'] if arch == 'x86_64' else []
-run(['clang', '-arch', arch, '-mmacosx-version-min=12.0', *link_flags,
+run(['clang', '-arch', arch, '-mmacosx-version-min=14.0', *link_flags,
      '-O2', '-ffp-contract=off', '-Wall', '-Wextra', '-o', out / 'jesussaves', *objects,
      source, *sdl_flags, '-framework', 'OpenGL'])
 app = out / 'Jesus Saves.app'
@@ -64,10 +64,11 @@ with (contents / 'Info.plist').open('wb') as f:
     plistlib.dump(dict(CFBundleExecutable='jesussaves', CFBundleIdentifier='org.jesussaves.app',
                       CFBundleName='Jesus Saves', CFBundlePackageType='APPL',
                       CFBundleVersion=(root / 'VERSION').read_text().strip(),
-                      LSMinimumSystemVersion='12.0', NSHighResolutionCapable=True), f)
+                      LSMinimumSystemVersion='14.0', NSHighResolutionCapable=True), f)
 shutil.copy2(root / 'LICENSE', contents / 'LICENSE')
 shutil.copytree(root / 'licenses', contents / 'licenses', dirs_exist_ok=True)
 shutil.copy2(root / 'macos/README.md', contents / 'README.md')
+shutil.copy2(root / 'macos/install-rosetta.command', contents / 'install-rosetta.command')
 run(['codesign', '--force', '--deep', '--sign', '-', app])
 (root / 'dist').mkdir(exist_ok=True)
 run(['ditto', '-c', '-k', '--sequesterRsrc', '--keepParent', app,

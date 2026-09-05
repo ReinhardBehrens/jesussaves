@@ -9,7 +9,7 @@ for source in (root / 'src').glob('*.asm'):
     s = source.read_text().replace(' wrt ..plt', '')
     s = re.sub(r'section \.note\.GNU-stack[^\n]*', '', s)
     s = s.replace('section .rodata', 'section __TEXT,__const')
-    s = re.sub(r'\bstderr\b', '__stderrp', s)
+    s = re.sub(r'\bstderr\b', 'mac_stderr', s)
     if source.name == 'gpu.asm':
         s = re.sub(r'^extern egl\w+\n', '', s, flags=re.M)
         s = re.sub(r'gpu_headless:.*?; Compile one stage',
