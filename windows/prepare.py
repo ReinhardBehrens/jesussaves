@@ -30,7 +30,6 @@ SDL_bool|SDL_SetHint|const char*,const char*
 int|SDL_setenv|const char*,const char*,int
 int|SDL_ShowCursor|int
 SDL_Window*|SDL_CreateWindow|const char*,int,int,int,int,Uint32
-SDL_Window*|SDL_CreateWindowFrom|const void*
 void|SDL_DestroyWindow|SDL_Window*
 int|SDL_GL_LoadLibrary|const char*
 SDL_GLContext|SDL_GL_CreateContext|SDL_Window*
@@ -79,7 +78,7 @@ void|glUniform1i|GLint,GLint
 void|glUseProgram|GLuint
 void|glViewport|GLint,GLint,GLsizei,GLsizei'''
 bridges=['#include "platform.h"']
-names={'fprintf','SDL_SetError','SDL_PollEvent','stderr'}
+names={'fprintf','SDL_SetError','SDL_PollEvent','SDL_CreateWindowFrom','stderr'}
 for line in spec.splitlines():
     ret,name,types=line.split('|'); names.add(name)
     args=types.split(',') if types else []

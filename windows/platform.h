@@ -5,6 +5,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <SDL.h>
+#include <SDL_syswm.h>
 #include <SDL_opengl.h>
 #include <stdio.h>
 #include <stdlib.h>

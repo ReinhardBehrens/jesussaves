@@ -25,6 +25,31 @@ int SYSV bridge_headless(void) {
     hidden=SDL_CreateWindow("Jesus Saves snapshot",0,0,64,64,SDL_WINDOW_OPENGL|SDL_WINDOW_HIDDEN);
     return hidden ? gpu_init(hidden) : -1;
 }
+// A Windows preview is our own child HWND in the Control Panel host.
+// Do not subclass or destroy an HWND owned by another process.
+SDL_Window *SYSV bridge_SDL_CreateWindowFrom(const void *native) {
+    HWND parent=(HWND)native;
+    RECT r;
+    if (!IsWindow(parent) || !GetClientRect(parent,&r)) {
+        SDL_SetError("Invalid preview host window"); return NULL;
+    }
+    Uint32 flags=SDL_WINDOW_HIDDEN|SDL_WINDOW_BORDERLESS;
+    if (SDL_GetHintBoolean(SDL_HINT_VIDEO_FOREIGN_WINDOW_OPENGL,SDL_FALSE)) flags|=SDL_WINDOW_OPENGL;
+    SDL_Window *w=SDL_CreateWindow("Jesus Saves preview",0,0,r.right-r.left,r.bottom-r.top,flags);
+    if (!w) return NULL;
+    SDL_SysWMinfo info; SDL_VERSION(&info.version);
+    if (!SDL_GetWindowWMInfo(w,&info)) { SDL_DestroyWindow(w); return NULL; }
+    HWND child=info.info.win.window;
+    LONG_PTR style=GetWindowLongPtrW(child,GWL_STYLE);
+    SetWindowLongPtrW(child,GWL_STYLE,(style & ~WS_POPUP)|WS_CHILD);
+    SetLastError(0);
+    if (!SetParent(child,parent) && GetLastError()!=0) {
+        SDL_SetError("Cannot attach screensaver preview"); SDL_DestroyWindow(w); return NULL;
+    }
+    SetWindowPos(child,NULL,0,0,r.right-r.left,r.bottom-r.top,SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
+    SDL_ShowWindow(w);
+    return w;
+}
 int SYSV bridge_SDL_PollEvent(SDL_Event *e) {
     if (saver && GetTickCount64()-started>1000) {
         POINT p; GetCursorPos(&p);
