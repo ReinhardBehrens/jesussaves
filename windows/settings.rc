@@ -1,0 +1,14 @@
+#include <windows.h>
+1 DIALOGEX 0, 0, 280, 145
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Jesus Saves - Screensaver Settings"
+FONT 9, "Segoe UI"
+BEGIN
+ LTEXT "JESUS SAVES  |  4K Screensaver", -1, 12, 12, 254, 14
+ LTEXT "Choose how to render the flames and gold lettering:", -1, 12, 32, 254, 14
+ CONTROL "GPU - OpenGL 3.3 (recommended)", 101, "Button", BS_AUTORADIOBUTTON | WS_GROUP | WS_TABSTOP, 12, 52, 254, 14
+ CONTROL "CPU - NASM / SSE2 (slower at 4K)", 102, "Button", BS_AUTORADIOBUTTON, 12, 72, 254, 14
+ LTEXT "Windows manages your screen lock and sign-in settings.", -1, 12, 96, 254, 14
+ DEFPUSHBUTTON "Save", IDOK, 158, 120, 50, 16
+ PUSHBUTTON "Cancel", IDCANCEL, 216, 120, 50, 16
+END

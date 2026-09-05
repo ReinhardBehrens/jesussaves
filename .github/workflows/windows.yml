@@ -1,0 +1,53 @@
+name: Windows package and native render tests
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y nasm gcc-mingw-w64-x86-64 python3-pil
+      - name: Fetch pinned official SDL2 SDK
+        run: |
+          mkdir -p build
+          curl -fL https://www.libsdl.org/release/SDL2-devel-2.32.10-mingw.tar.gz -o build/SDL2.tar.gz
+          echo '83a5d74012311edc3c0d40ea6faecbe57ad692aa033fa5dc273cc937e3938ff2  build/SDL2.tar.gz' | sha256sum -c -
+          tar -xzf build/SDL2.tar.gz -C build
+      - run: SDL_ROOT="$PWD/build/SDL2-2.32.10/x86_64-w64-mingw32" python3 windows/build.py
+      - run: python3 windows/package.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64
+          path: |
+            build/windows/*.exe
+            build/windows/*.scr
+            build/windows/*.dll
+            dist/*windows*
+  test:
+    needs: build
+    runs-on: windows-2025
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-x64
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install Pillow
+      - name: Test with Mesa OpenGL software driver (CI only, not shipped)
+        shell: pwsh
+        run: |
+          Invoke-WebRequest https://github.com/pal1000/mesa-dist-win/releases/download/26.2.0/mesa3d-26.2.0-release-msvc.7z -OutFile mesa.7z
+          if ((Get-FileHash mesa.7z -Algorithm SHA256).Hash.ToLower() -ne 'dcb2719ef346dab5b609fcb193a5f13cfc4b0502e3f4de1ad43d349477402f47') { throw 'Mesa checksum mismatch' }
+          7z x mesa.7z -omesa
+          Get-ChildItem mesa -Recurse -Filter opengl32.dll | Select-Object FullName
+          Copy-Item mesa/x64/*.dll build/windows/
+          $env:GALLIUM_DRIVER='llvmpipe'
+          python windows/test.py
+      - name: Upload tested community ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-tested-package
+          path: dist/*windows*
