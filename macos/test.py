@@ -35,14 +35,16 @@ arch=platform.machine()
 assert arch in run(['lipo','-archs',exe])
 run(['codesign','--verify','--deep','--strict',app])
 run([exe,'--help'])
-backend='--cpu' if arch=='x86_64' else '--gpu'
-images=[]
-for t in (0,2):
-    with tempfile.TemporaryDirectory() as d:
-        run([exe,backend,'--snapshot'],cwd=d,env=dict(os.environ,FLAME_TIME=str(t)),timeout=180)
-        im=Image.open(Path(d)/'flame.ppm').convert('RGB')
-        assert im.size==(3840,2160)
-        assert len(im.resize((384,216)).getcolors(100000) or [])>100
-        images.append(im)
-assert ImageChops.difference(*images).getbbox(), 'Animation is static'
-print(f'PASS packaged {arch}: 4K {backend} rendering, animation, signature and bundled dependencies.')
+backends=['--cpu','--gpu'] if arch=='x86_64' else ['--gpu']
+for backend in backends:
+    images=[]
+    for t in (0,2):
+        with tempfile.TemporaryDirectory() as d:
+            run([exe,backend,'--snapshot'],cwd=d,env=dict(os.environ,FLAME_TIME=str(t)),timeout=180)
+            im=Image.open(Path(d)/'flame.ppm').convert('RGB')
+            assert im.size==(3840,2160)
+            assert len(im.resize((384,216)).getcolors(100000) or [])>100
+            images.append(im)
+    assert ImageChops.difference(*images).getbbox(), 'Animation is static'
+run([exe,'--windowed'],env=dict(os.environ,FLAME_FRAMES='3'),timeout=180)
+print(f'PASS packaged {arch}: 4K {backends} rendering, animation, live GPU window, signature and bundled dependencies.')

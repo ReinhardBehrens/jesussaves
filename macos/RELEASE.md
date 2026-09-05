@@ -6,4 +6,4 @@ Native macOS 14+ standalone apps for Intel and Apple Silicon, rendering at 3840 
 - These preview apps are ad-hoc signed and not notarized; macOS may require approval in Privacy & Security.
 - These are standalone apps, not yet registered in macOS Screen Saver settings. ARM64 has no software-only final renderer.
 
-Both packages are compiled on matching Mac CI runners. The bundled Intel CPU and ARM64 GPU render paths are checked for 4K output and animation. Source and SHA-256 checksums are included.
+Both packages are compiled on matching Mac CI runners. The bundled Intel CPU/GPU and ARM64 GPU render paths are checked for 4K output and animation, with a live GPU-window smoke test. The Intel CPU renderer is also tested under Apple Rosetta on ARM. Source and SHA-256 checksums are included.
