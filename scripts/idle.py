@@ -9,7 +9,7 @@ from gi.repository import Gio, GLib
 try:
     from gi.repository import GLibUnix
     add_unix_signal=GLibUnix.signal_add
-except ImportError:  # GLib shipped by older Ubuntu releases
+except (ImportError, AttributeError):  # Older typelibs omit GLibUnix.signal_add
     add_unix_signal=GLib.unix_signal_add
 
 class IdleSaver:

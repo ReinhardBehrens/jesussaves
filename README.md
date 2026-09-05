@@ -5,7 +5,8 @@
 
 **A 4K screensaver with reflective gold lettering, living flames, and a heavenly sky.**
 
-[![Ubuntu download](https://img.shields.io/badge/Download-Ubuntu%20.deb-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.0.0/jesussaves_1.0.0_amd64.deb)
+[![Ubuntu download](https://img.shields.io/badge/Download-Ubuntu%20.deb-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves_1.1.0_amd64.deb)
+[![Windows download](https://img.shields.io/badge/Download-Windows%2011-0078D4?style=for-the-badge)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves-1.1.0-windows-x64.zip)
 [![Release](https://img.shields.io/github/v/release/ReinhardBehrens/jesussaves?style=for-the-badge&color=c99a36)](https://github.com/ReinhardBehrens/jesussaves/releases/latest)
 [![License](https://img.shields.io/badge/License-GPL%203.0-blue?style=for-the-badge)](LICENSE)
 
@@ -25,11 +26,12 @@ Reflective gold **JESUS SAVES** lettering floats and rotates above turbulent fla
 
 | Community edition | Download |
 |---|---|
-| **Ubuntu 26.04.1 LTS · Intel / AMD 64-bit** | [**Download the `.deb` installer**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.0.0/jesussaves_1.0.0_amd64.deb) |
-| Matching source code | [Source archive](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.0.0/jesussaves-1.0.0-source.tar.gz) |
-| Verify your download | [SHA-256 checksums](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.0.0/SHA256SUMS) |
+| **Ubuntu 26.04.1 LTS · Intel / AMD 64-bit** | [**Download the `.deb` installer**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves_1.1.0_amd64.deb) |
+| **Windows 11 · Intel / AMD 64-bit** | [**Download the Windows ZIP**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves-1.1.0-windows-x64.zip) · [Checksum](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves-1.1.0-windows-x64.zip.sha256) |
+| Matching source code | [Source archive](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/jesussaves-1.1.0-source.tar.gz) |
+| Verify your download | [SHA-256 checksums](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.1.0/SHA256SUMS) |
 
-Free to download, study, and share under the GPL. Windows 11 packaging is in development; the published installer above is for Ubuntu.
+Free to download, study, and share under the GPL. The Windows ZIP includes a portable executable, a native `.scr` screensaver, and a per-user installer.
 
 ## The Gospel of Jesus Christ
 
@@ -66,7 +68,7 @@ The release target is **Ubuntu 26.04.1 LTS, amd64**. The project is built and ex
 Download the `.deb` from [Releases](https://github.com/ReinhardBehrens/jesussaves/releases), then:
 
 ```bash
-sudo apt install ./jesussaves_1.0.0_amd64.deb
+sudo apt install ./jesussaves_1.1.0_amd64.deb
 jesussaves --gpu
 ```
 
@@ -171,7 +173,7 @@ FLAME_FRAMES=120 ./build/jesussaves --gpu --windowed
 
 make test
 python3 tests/embedding.py                 # requires a working X11 display
-python3 scripts/package.py                # dist/jesussaves_1.0.0_amd64.deb
+python3 scripts/package.py                # dist/jesussaves_1.1.0_amd64.deb
 ```
 
 GPU snapshots use an EGL surfaceless context; CPU snapshots do not need a display. A software OpenGL driver can also run GPU tests with `LIBGL_ALWAYS_SOFTWARE=1`. Snapshots use a fixed seed; live runs seed the gust generator from the performance counter. `FLAME_TIME` is clamped to 0–60 seconds for bounded snapshot generation.
