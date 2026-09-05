@@ -95,15 +95,13 @@ try:
             if hwnd:u.SendMessageW(hwnd,0x111,2,None)
             try:panel.wait(timeout=10)
             except subprocess.TimeoutExpired:panel.kill()
-            # The embedded preview must release its executable when its host closes.
-            for attempt in range(100):
-                try:
-                    (installed/'JesusSaves.scr').rename(installed/'closed-preview.scr')
-                    (installed/'closed-preview.scr').rename(installed/'JesusSaves.scr')
-                    break
-                except PermissionError:
-                    if attempt==99:raise
-                    time.sleep(.1)
+            # Wait for real preview processes to exit, not merely for a rename
+            # (Windows permits renaming some mapped executables).
+            probe_env=dict(os.environ,JESUSSAVES_TEST_SCR=str(installed/'JesusSaves.scr'))
+            probe=subprocess.run(['powershell.exe','-NoProfile','-Command',
+                "$ErrorActionPreference='Stop'; Get-Process | Where-Object { $_.Path -eq $env:JESUSSAVES_TEST_SCR } | ForEach-Object { if (-not $_.WaitForExit(10000)) { throw ('Preview still running: ' + $_.Id) } }"],
+                env=probe_env,capture_output=True,timeout=30)
+            assert probe.returncode==0,(probe.stdout,probe.stderr)
         print('PASS installer: selects Jesus Saves, enables saver, defaults to 5 minutes, supports reinstall/custom time, preserves sign-in setting')
 finally:
     assert u.SystemParametersInfoW(0x0F,old_timeout,None,3)

@@ -53,7 +53,7 @@ SDL_Window *SYSV bridge_SDL_CreateWindowFrom(const void *native) {
     return w;
 }
 int SYSV bridge_SDL_PollEvent(SDL_Event *e) {
-    if (preview_parent && !IsWindow(preview_parent)) {
+    if (preview_parent && (!IsWindow(preview_parent) || !IsWindowVisible(preview_parent))) {
         memset(e,0,sizeof(*e)); e->type=SDL_QUIT; return 1;
     }
     if (saver && GetTickCount64()-started>1000) {
@@ -63,6 +63,7 @@ int SYSV bridge_SDL_PollEvent(SDL_Event *e) {
         if (active) { memset(e,0,sizeof(*e)); e->type=SDL_QUIT; return 1; }
     }
     int result=SDL_PollEvent(e);
+    if (result && preview_parent && e->type==SDL_WINDOWEVENT && e->window.event==SDL_WINDOWEVENT_CLOSE) e->type=SDL_QUIT;
     if (result && saver && (e->type==SDL_KEYDOWN || e->type==SDL_MOUSEBUTTONDOWN)) e->type=SDL_QUIT;
     return result;
 }
