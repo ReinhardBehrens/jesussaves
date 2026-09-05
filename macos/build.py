@@ -33,7 +33,9 @@ if arch == 'x86_64':
         obj = source.with_suffix('.o')
         run(['nasm', '-f', 'macho64', '-o', obj, source])
         objects.append(obj)
-sdl_flags = shlex.split(subprocess.check_output(['sdl2-config', '--cflags', '--libs'], text=True))
+run(['python3', 'macos/build_sdl.py'])
+sdl_config = root / 'build/sdl2-2.32.10-install/bin/sdl2-config'
+sdl_flags = shlex.split(subprocess.check_output([sdl_config, '--cflags', '--libs'], text=True))
 source = 'macos/platform.c' if arch == 'x86_64' else 'macos/arm64.c'
 link_flags = ['-Wl,-no_pie'] if arch == 'x86_64' else []
 run(['clang', '-arch', arch, '-mmacosx-version-min=14.0', *link_flags,

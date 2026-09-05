@@ -14,7 +14,7 @@ Download the matching ZIP from [Apple — BETA Installers](https://github.com/Re
 On the target Mac with Xcode Command Line Tools and Homebrew:
 
 ```sh
-brew install nasm sdl2
+brew install nasm
 python3 -m venv .venv
 source .venv/bin/activate
 pip install Pillow
@@ -22,7 +22,7 @@ python3 macos/build.py
 open 'build/macos/Jesus Saves.app'
 ```
 
-The script chooses the host architecture, bundles SDL2 and the required assets and licenses, and writes `dist/jesussaves-macos-intel.zip` or `dist/jesussaves-macos-arm64.zip`. The signature is ad-hoc, not Apple Developer ID or notarized. macOS may require approval in Privacy & Security when opening a downloaded copy.
+The script chooses the host architecture, builds pinned upstream SDL2 2.32.10 and bundles it with the required assets and licenses, and writes `dist/jesussaves-macos-intel.zip` or `dist/jesussaves-macos-arm64.zip`. The signature is ad-hoc, not Apple Developer ID or notarized. macOS may require approval in Privacy & Security when opening a downloaded copy.
 
 Default launch is full screen with GPU rendering. Escape quits. Launch the executable inside the bundle with `--windowed` for a window or `--screensaver` to quit on user input. `--gpu --snapshot` writes a 3840 × 2160 `flame.ppm`. The Intel build additionally supports `--cpu`; ARM64 does not include a software-only final renderer.
 

@@ -52,7 +52,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: brew install nasm sdl2
+      - run: brew install nasm
       - run: python3 -m pip install Pillow
       - run: python3 macos/build.py
       - name: Verify packaged architecture, rendering and signature
