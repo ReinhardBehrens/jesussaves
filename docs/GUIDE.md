@@ -74,7 +74,7 @@ The module accepts `XSCREENSAVER_WINDOW` and `--window-id 0xID`; it draws into t
 
 ## Windows 11 x64
 
-The Windows edition includes **JesusSaves.exe**, a native **JesusSaves.scr** screensaver, and the SDL2 runtime. Extract the complete Windows ZIP from [Releases](https://github.com/ReinhardBehrens/jesussaves/releases), then run `install.cmd`. It installs for your user account and selects and enables Jesus Saves with a five-minute wait, then opens Windows Screen Saver Settings. Your sign-in preference is preserved.
+The Windows edition includes **JesusSaves.exe**, a native **JesusSaves.scr** screensaver, and the SDL2 runtime. Extract the complete Windows ZIP from [Releases](https://github.com/ReinhardBehrens/jesussaves/releases), then run `install.cmd`. It installs for your user account, selects Jesus Saves, enables a five-minute wait, and opens Windows Screen Saver Settings. Your sign-in preference is preserved.
 
 Use **Settings** to select GPU or CPU rendering. Moving the mouse or pressing a key dismisses screensaver mode. The small Windows preview uses CPU rendering; the fullscreen saver uses your saved choice. Portable mode exits with Escape. The saver uses the primary display.
 

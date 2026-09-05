@@ -18,6 +18,10 @@ exits when you move the mouse or press a key. It uses the primary display.
 This community build is unsigned; Windows may show an unknown-publisher prompt.
 Download it from https://github.com/ReinhardBehrens/jesussaves/releases only.
 
+The first installation saves your previous selection, active state and timeout in
+%LOCALAPPDATA%\JesusSaves\previous-screensaver.json. Reinstalling preserves that
+backup. Close Screen Saver Settings and Jesus Saves before updating.
+
 ## Portable use
 
 Double-click JesusSaves.exe to run fullscreen. Escape exits portable mode.
