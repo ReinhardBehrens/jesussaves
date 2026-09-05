@@ -129,6 +129,21 @@ Select **Jesus Saves 4K**. On older XScreenSaver releases, the settings command 
 
 The module accepts `XSCREENSAVER_WINDOW` and `--window-id 0xID`; it draws into the host's existing window instead of opening a second fullscreen window. `--screensaver` requires a host window. The package installs an XScreenSaver configuration panel with CPU/GPU selection.
 
+## Windows 11 x64
+
+The Windows edition includes **JesusSaves.exe**, a native **JesusSaves.scr** screensaver, and the SDL2 runtime. Extract the complete Windows ZIP from [Releases](https://github.com/ReinhardBehrens/jesussaves/releases), then run `install.cmd`. It installs for your user account and opens Windows Screen Saver Settings. Choose your wait time and sign-in preference, then click **Apply**.
+
+Use **Settings** to select GPU or CPU rendering. Moving the mouse or pressing a key dismisses screensaver mode. The small Windows preview uses CPU rendering; the fullscreen saver uses your saved choice. Portable mode exits with Escape. The saver uses the primary display.
+
+```powershell
+.\JesusSaves.exe --gpu --windowed
+.\JesusSaves.exe --cpu --windowed
+.\JesusSaves.scr /c
+.\JesusSaves.scr /s
+```
+
+Windows requires an Intel/AMD x64 CPU; GPU mode requires an OpenGL 3.3 driver. The community binaries are unsigned. Native CI runs on Windows Server 2025 with Mesa software OpenGL; physical Windows 11 GPU testing has not been performed. [Windows installation and removal](windows/README-Windows.md) · [Windows build instructions](windows/BUILD.md).
+
 ## Build from source
 
 ```bash
@@ -141,7 +156,7 @@ make -j2
 ./build/jesussaves --gpu
 ```
 
-GCC is used to **link** the NASM object files with system libraries. There is no C/C++ renderer. Python only packs assets during the build and supplies optional desktop integration and tests. No font download, API key, or internet access is needed to build or run.
+GCC is used to **link** the NASM object files with system libraries. There is no C/C++ renderer. Python only packs assets during the build and supplies optional desktop integration and tests. With dependencies installed, no font download, API key, or internet access is needed to build or run. Windows uses a small C platform layer to bridge calling conventions and integrate with Screen Saver Settings; rendering stays in NASM and GLSL.
 
 `make install` installs under `~/.local`. This does not automatically enable idle activation. Use `~/.local/bin/jesussaves-register --binary ~/.local/bin/jesussaves` for a user-installed XScreenSaver entry. Stop the idle service before `make uninstall`.
 

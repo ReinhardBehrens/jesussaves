@@ -2,6 +2,7 @@
 """Native Windows tests of ABI, 4K renderers and Windows screensaver contract."""
 import os, subprocess, tempfile, ctypes, time, sys, traceback
 from pathlib import Path
+from ctypes import wintypes
 from PIL import Image, ImageChops
 def report_exception(kind, value, tb):
     message=''.join(traceback.format_exception(kind,value,tb)).replace('%','%25').replace('\r','%0D').replace('\n','%0A')
@@ -49,12 +50,28 @@ finally:
 u.CreateWindowExW.restype=ctypes.c_void_p
 u.CreateWindowExW.argtypes=[ctypes.c_ulong,ctypes.c_wchar_p,ctypes.c_wchar_p,ctypes.c_ulong,ctypes.c_int,ctypes.c_int,ctypes.c_int,ctypes.c_int,ctypes.c_void_p,ctypes.c_void_p,ctypes.c_void_p,ctypes.c_void_p]
 u.IsWindow.argtypes=[ctypes.c_void_p];u.DestroyWindow.argtypes=[ctypes.c_void_p]
+u.PeekMessageW.argtypes=[ctypes.POINTER(wintypes.MSG),ctypes.c_void_p,ctypes.c_uint,ctypes.c_uint,ctypes.c_uint]
+u.TranslateMessage.argtypes=[ctypes.POINTER(wintypes.MSG)]
+u.DispatchMessageW.argtypes=[ctypes.POINTER(wintypes.MSG)]
+u.DispatchMessageW.restype=ctypes.c_ssize_t
 host=u.CreateWindowExW(0,'STATIC','Jesus Saves test host',0x10000000,0,0,640,360,None,None,None,None)
 assert host
 try:
     for args in [['/p',str(host)],['/p:'+str(host)]]:
-        p=subprocess.run([str(scr),*args],env=dict(os.environ,FLAME_FRAMES='3'),timeout=60,capture_output=True)
-        assert p.returncode==0,(args,p.returncode,p.stderr)
+        # A real Control Panel host pumps messages. Blocking this thread in
+        # communicate() deadlocks cross-process SetParent/SendMessage calls.
+        p=subprocess.Popen([str(scr),*args],env=dict(os.environ,FLAME_FRAMES='3'),stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        msg=wintypes.MSG(); deadline=time.monotonic()+60
+        try:
+            while p.poll() is None and time.monotonic()<deadline:
+                while u.PeekMessageW(ctypes.byref(msg),None,0,0,1):
+                    u.TranslateMessage(ctypes.byref(msg));u.DispatchMessageW(ctypes.byref(msg))
+                time.sleep(.01)
+            assert p.poll() is not None,'Preview did not finish'
+            out,err=p.communicate()
+            assert p.returncode==0,(args,p.returncode,err)
+        finally:
+            if p.poll() is None:p.kill()
         assert u.IsWindow(host),'Preview destroyed host window'
 finally:u.DestroyWindow(host)
 print('PASS Windows settings and preview HWND embedding')
