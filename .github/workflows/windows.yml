@@ -41,6 +41,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install Pillow
+      - name: Verify the packaged Windows installer
+        run: python windows/test_install.py
       - name: Test with Mesa OpenGL software driver (CI only, not shipped)
         shell: pwsh
         run: |
