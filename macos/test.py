@@ -10,7 +10,8 @@ root=Path(__file__).resolve().parents[1]
 app=root/'build/macos/Jesus Saves.app'
 exe=app/'Contents/MacOS/jesussaves'
 def run(args, **kwargs):
-    kwargs.setdefault('timeout', 180)
+    kwargs.setdefault('timeout', 30)
+    print('::notice::Checking ' + ' '.join(str(x) for x in args), flush=True)
     try:
         result=subprocess.run([str(x) for x in args],capture_output=True,text=True,**kwargs)
     except subprocess.TimeoutExpired:
