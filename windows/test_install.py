@@ -83,7 +83,11 @@ try:
                     text=ctypes.create_unicode_buffer(128)
                     u.SendMessageW(child,0xD,128,ctypes.cast(text,ctypes.c_void_p));edits.append(text.value)
                 return True
-            u.EnumChildWindows(hwnd,collect,0)
+            for _ in range(100):
+                selections.clear();edits.clear()
+                u.EnumChildWindows(hwnd,collect,0)
+                if selections and edits:break
+                time.sleep(.1)
             assert any('jesus' in text.lower() for text in selections),selections
             assert '7' in edits,edits
             print('PASS Windows settings panel: selected Jesus Saves and displayed 7-minute custom wait')
@@ -91,6 +95,15 @@ try:
             if hwnd:u.SendMessageW(hwnd,0x111,2,None)
             try:panel.wait(timeout=10)
             except subprocess.TimeoutExpired:panel.kill()
+            # The embedded preview must release its executable when its host closes.
+            for attempt in range(100):
+                try:
+                    (installed/'JesusSaves.scr').rename(installed/'closed-preview.scr')
+                    (installed/'closed-preview.scr').rename(installed/'JesusSaves.scr')
+                    break
+                except PermissionError:
+                    if attempt==99:raise
+                    time.sleep(.1)
         print('PASS installer: selects Jesus Saves, enables saver, defaults to 5 minutes, supports reinstall/custom time, preserves sign-in setting')
 finally:
     assert u.SystemParametersInfoW(0x0F,old_timeout,None,3)

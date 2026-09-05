@@ -6,6 +6,7 @@
 #include <string.h>
 FILE *bridge_stderr;
 static SDL_Window *hidden;
+static HWND preview_parent;
 static int saver;
 static POINT initial_mouse;
 static ULONGLONG started;
@@ -47,10 +48,14 @@ SDL_Window *SYSV bridge_SDL_CreateWindowFrom(const void *native) {
         SDL_SetError("Cannot attach screensaver preview"); SDL_DestroyWindow(w); return NULL;
     }
     SetWindowPos(child,NULL,0,0,r.right-r.left,r.bottom-r.top,SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
+    preview_parent=parent;
     SDL_ShowWindow(w);
     return w;
 }
 int SYSV bridge_SDL_PollEvent(SDL_Event *e) {
+    if (preview_parent && !IsWindow(preview_parent)) {
+        memset(e,0,sizeof(*e)); e->type=SDL_QUIT; return 1;
+    }
     if (saver && GetTickCount64()-started>1000) {
         POINT p; GetCursorPos(&p);
         int active=abs(p.x-initial_mouse.x)>4 || abs(p.y-initial_mouse.y)>4;
