@@ -10,7 +10,13 @@ import subprocess
 root = Path(__file__).resolve().parents[1]
 os.chdir(root)
 def run(args):
-    subprocess.run([str(a) for a in args], check=True)
+    result = subprocess.run([str(a) for a in args], text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    print(result.stdout, end='')
+    if result.returncode:
+        if os.environ.get('GITHUB_ACTIONS'):
+            message = result.stdout[-12000:].replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+            print('::error::' + message)
+        raise subprocess.CalledProcessError(result.returncode, args)
 if platform.system() != 'Darwin' or platform.machine() != 'x86_64':
     raise SystemExit('Run on an Intel macOS host (or x86_64 Rosetta shell with Intel SDL2).')
 run(['python3', 'scripts/pack_background.py'])
