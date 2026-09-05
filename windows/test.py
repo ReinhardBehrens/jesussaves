@@ -1,8 +1,13 @@
 #!/usr/bin/env python3
 """Native Windows tests of ABI, 4K renderers and Windows screensaver contract."""
-import os, subprocess, tempfile, ctypes, time
+import os, subprocess, tempfile, ctypes, time, sys, traceback
 from pathlib import Path
 from PIL import Image, ImageChops
+def report_exception(kind, value, tb):
+    message=''.join(traceback.format_exception(kind,value,tb)).replace('%','%25').replace('\r','%0D').replace('\n','%0A')
+    print('::error::'+message,flush=True)
+    sys.__excepthook__(kind,value,tb)
+sys.excepthook=report_exception
 root=Path(__file__).resolve().parents[1]
 exe=root/'build/windows/JesusSaves.exe';scr=exe.with_suffix('.scr')
 def run(args,**kw):

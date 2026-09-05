@@ -44,6 +44,7 @@ jobs:
       - name: Test with Mesa OpenGL software driver (CI only, not shipped)
         shell: pwsh
         run: |
+          trap { Write-Output ('::error::' + $_.ToString()); exit 1 }
           Invoke-WebRequest https://github.com/pal1000/mesa-dist-win/releases/download/26.2.0/mesa3d-26.2.0-release-msvc.7z -OutFile mesa.7z
           if ((Get-FileHash mesa.7z -Algorithm SHA256).Hash.ToLower() -ne 'dcb2719ef346dab5b609fcb193a5f13cfc4b0502e3f4de1ad43d349477402f47') { throw 'Mesa checksum mismatch' }
           7z x mesa.7z -omesa
