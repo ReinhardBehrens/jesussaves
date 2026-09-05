@@ -7,7 +7,7 @@ Two standalone applications are built for macOS 14 Sonoma and later:
 | Apple Silicon ARM64 | Native ARM NEON | Shared OpenGL shaders at 3840 × 2160 | Not required |
 | Intel x86-64 | Shared NASM SSE2 | NASM CPU renderer or shared OpenGL shaders at 3840 × 2160 | Only when running this Intel build on Apple Silicon |
 
-Download the matching ZIP artifact from a successful [macOS build workflow](https://github.com/ReinhardBehrens/jesussaves/actions/workflows/macos.yml), unzip, and move **Jesus Saves.app** to Applications. These are standalone apps, not `.saver` plug-ins registered in macOS Screen Saver settings. Idle activation is not yet included.
+Download the matching ZIP from [Apple — BETA Installers](https://github.com/ReinhardBehrens/jesussaves/releases/tag/macos-v1.1.1-beta.1), unzip, and move **Jesus Saves.app** to Applications. These are standalone apps, not `.saver` plug-ins registered in macOS Screen Saver settings. Idle activation is not yet included.
 
 ## Build
 

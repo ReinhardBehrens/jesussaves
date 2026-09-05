@@ -43,6 +43,15 @@ A free 4K screensaver for Ubuntu and Windows, crafted in NASM assembly.
 
 **Intel / AMD x64 only.** A 4K monitor is optional: every frame is rendered at 4K and scaled to your display. GPU mode needs OpenGL 3.3; CPU mode is considerably slower at this resolution.
 
+### Apple — BETA Installers
+
+| Mac | Download | Compatibility |
+| :--- | :--- | :--- |
+| **Apple Silicon · M-series** | [**ARM64 BETA Installer**](https://github.com/ReinhardBehrens/jesussaves/releases/download/macos-v1.1.1-beta.1/jesussaves-macos-arm64.zip) | Native ARM64; no Rosetta required |
+| **Intel Mac** | [**Intel BETA Installer**](https://github.com/ReinhardBehrens/jesussaves/releases/download/macos-v1.1.1-beta.1/jesussaves-macos-intel.zip) | Intel x86-64; optional Rosetta on Apple Silicon |
+
+**macOS 14 or later.** These beta ZIPs contain standalone apps: unzip and move **Jesus Saves.app** into Applications. They do not yet appear in macOS Screen Saver settings. Builds are ad-hoc signed, not notarized. [Mac installation & Rosetta guide →](macos/README.md)
+
 [🔎 Release notes & checksums](https://github.com/ReinhardBehrens/jesussaves/releases/latest) · [📜 GPL license](LICENSE)
 
 <a name="start"></a>
@@ -118,7 +127,7 @@ Turn to Jesus in faith. Speak honestly to Him in prayer, ask His forgiveness, an
 <table>
 <tr>
 <td width="100" align="center"><a href="https://github.com/ReinhardBehrens"><img src="https://github.com/ReinhardBehrens.png?size=160" alt="Reinhard Behrens GitHub avatar" width="80" height="80"></a></td>
-<td><strong>Reinhard Behrens</strong><br>Creator of the Jesus Saves screensaver.<br><a href="https://github.com/ReinhardBehrens">👤 GitHub profile</a> · <a href="https://github.com/ReinhardBehrens/jesussaves/issues">💬 Report a problem or suggest an improvement</a></td>
+<td><strong>Reinhard Behrens</strong><br>Creator of the Jesus Saves screensaver.<br><a href="https://github.com/ReinhardBehrens">👤 GitHub profile</a> · <a href="mailto:reinhardforjesus@gmail.com">✉️ reinhardforjesus@gmail.com</a> · <a href="https://github.com/ReinhardBehrens/jesussaves/issues">💬 Report a problem or suggest an improvement</a></td>
 </tr>
 </table>
 
@@ -129,6 +138,3 @@ Turn to Jesus in faith. Speak honestly to Him in prayer, ask His forgiveness, an
 
 </div>
 
-### macOS preview builds
-
-Native **Apple Silicon (ARM64)** and **Intel** application builds are available through the [macOS build workflow](https://github.com/ReinhardBehrens/jesussaves/actions/workflows/macos.yml). The ARM64 build does not need Rosetta. See [downloads, build instructions and compatibility](macos/README.md). These are standalone apps; macOS Screen Saver settings integration is not yet included.
