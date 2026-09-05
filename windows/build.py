@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Cross-build with MinGW-w64 and NASM; SDL_ROOT is the official MinGW SDK."""
-import os,shlex,subprocess,shutil,zipfile
+import os,shlex,subprocess,shutil
 from pathlib import Path
 root=Path(__file__).resolve().parents[1];os.chdir(root)
 def run(args): subprocess.run([str(a) for a in args],check=True)

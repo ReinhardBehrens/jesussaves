@@ -80,6 +80,7 @@ int main(int argc,char **argv) {
     const char *ext=strrchr(argv[0],'.');
     int config=!arg && ext && _stricmp(ext,".scr")==0;
     if (arg && (arg[0]=='/' || (arg[0]=='-' && arg[1]!='-'))) {
+        if (!arg[1]) return 2;
         char mode=(char)tolower((unsigned char)arg[1]);
         if (arg[2] && arg[2]!=':') return 2;
         const char *handle=arg[2]==':'?arg+3:(argc>2?argv[2]:NULL);

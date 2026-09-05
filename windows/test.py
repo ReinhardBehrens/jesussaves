@@ -53,3 +53,18 @@ try:
         assert u.IsWindow(host),'Preview destroyed host window'
 finally:u.DestroyWindow(host)
 print('PASS Windows settings and preview HWND embedding')
+
+# Fullscreen saver mode runs with the same renderer and dismisses on input.
+p=subprocess.Popen([str(scr),'/s'],env=dict(os.environ,FLAME_FRAMES='3'))
+assert p.wait(timeout=60)==0
+p=subprocess.Popen([str(scr),'/s'])
+try:
+    time.sleep(3)
+    assert p.poll() is None,'Saver exited before input'
+    u.keybd_event(0x1B,0,0,0)
+    time.sleep(.15)
+    u.keybd_event(0x1B,0,2,0)
+    assert p.wait(timeout=30)==0
+finally:
+    if p.poll() is None:p.kill()
+print('PASS Windows fullscreen screensaver and input dismissal')

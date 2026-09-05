@@ -4,6 +4,7 @@
 from pathlib import Path
 import shutil,subprocess
 ROOT=Path(__file__).resolve().parents[1];stage=ROOT/'build/package-root';out=ROOT/'dist'
+version=(ROOT/'VERSION').read_text().strip()
 if not (ROOT/'build/jesussaves').exists():raise SystemExit('Run make first')
 if stage.exists():shutil.rmtree(stage)
 stage.mkdir(parents=True);out.mkdir(exist_ok=True)
@@ -17,7 +18,7 @@ link=stage/'usr/lib/xscreensaver/jesussaves';link.parent.mkdir(parents=True,exis
 size=sum(p.stat().st_size for p in stage.rglob('*') if p.is_file() and not p.is_symlink())//1024
 control=stage/'DEBIAN';control.mkdir()
 (control/'control').write_text(f'''Package: jesussaves
-Version: 1.0.0
+Version: {version}
 Section: x11
 Priority: optional
 Architecture: amd64
@@ -31,6 +32,6 @@ Description: 4K gold text and flame screensaver with NASM CPU and GPU backends
  background. Includes GNOME idle integration and XScreenSaver embedding.
  Rendering uses NASM/SSE2 or NASM-controlled OpenGL 3.3 with GLSL effects.
 ''')
-package=out/'jesussaves_1.0.0_amd64.deb'
+package=out/f'jesussaves_{version}_amd64.deb'
 subprocess.run(['dpkg-deb','--root-owner-group','-Zxz','--build',str(stage),str(package)],check=True)
 print(package)

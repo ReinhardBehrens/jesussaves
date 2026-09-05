@@ -6,6 +6,9 @@ for %%F in (JesusSaves.exe JesusSaves.scr SDL2.dll LICENSE SDL2-LICENSE.txt READ
   copy /Y "%~dp0%%F" "%DEST%\%%F" >nul
   if errorlevel 1 goto failed
 )
+if not exist "%DEST%\licenses" mkdir "%DEST%\licenses"
+copy /Y "%~dp0licenses\DejaVu.txt" "%DEST%\licenses\DejaVu.txt" >nul
+if errorlevel 1 goto failed
 rundll32.exe desk.cpl,InstallScreenSaver "%DEST%\JesusSaves.scr"
 echo Choose your wait time and sign-in preference in Screen Saver Settings, then Apply.
 pause

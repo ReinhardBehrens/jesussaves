@@ -1,10 +1,12 @@
-name: Publish Ubuntu community release
+name: Publish community release
 on:
   push:
     tags: ['v*']
 permissions:
   contents: write
 jobs:
+  windows:
+    uses: ./.github/workflows/windows.yml
   release:
     runs-on: ubuntu-24.04
     container: ubuntu:26.04
@@ -29,10 +31,24 @@ jobs:
         run: |
           python3 scripts/package.py
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git archive --format=tar.gz --prefix=jesussaves-1.0.0/ HEAD > dist/jesussaves-1.0.0-source.tar.gz
+          version="$(cat VERSION)"
+          git archive --format=tar.gz --prefix="jesussaves-$version/" HEAD > "dist/jesussaves-$version-source.tar.gz"
           cd dist
           sha256sum *.deb *.tar.gz > SHA256SUMS
       - name: Publish verified downloads
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh release create "$GITHUB_REF_NAME" dist/*.deb dist/*source.tar.gz dist/SHA256SUMS --verify-tag --title "Jesus Saves $GITHUB_REF_NAME" --notes-file docs/RELEASE.md
+
+  publish-windows:
+    needs: [release, windows]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: windows-tested-package
+          path: dist
+      - name: Add tested Windows downloads to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$GITHUB_REF_NAME" dist/* --repo "$GITHUB_REPOSITORY"

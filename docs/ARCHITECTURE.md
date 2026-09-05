@@ -94,3 +94,11 @@ There is no objective single “best” open-source flame. The following primary
 | [SDL_EnableScreenSaver](https://wiki.libsdl.org/SDL2/SDL_EnableScreenSaver) | Preserve native screen blanking | Called explicitly after video initialization |
 
 The implementation is original project code applying these general techniques; those repositories were not vendored or represented as NASM ports. Font notices and asset provenance are kept separately.
+
+## Windows x64 portability
+
+`windows/prepare.py` emits COFF-compatible NASM sources from the same six renderer files. Internal assembly entry points retain the System V AMD64 calling convention. Generated, typed `sysv_abi` C functions translate calls to Windows x64 SDL2, C-runtime and OpenGL entry points; GCC preserves the differing nonvolatile registers at the boundary. An isolated, non-inlined entry wrapper avoids a MinGW GCC 13 prologue-generation bug when the CRT `main` calls System V code directly. The C files implement platform integration only, not rendering.
+
+OpenGL entry points are resolved using `SDL_GL_GetProcAddress` and validated before rendering. GPU snapshots use a hidden SDL OpenGL window rather than Linux EGL. `/s` runs the screensaver; `/p HWND` embeds the CPU preview into the host window; `/c` opens a native renderer-selection dialog. The saved preference lives in HKCU\Software\JesusSaves. Input monitoring dismisses fullscreen saver mode after a short initial mouse-motion grace period. Windows retains control of locking and sign-in policy.
+
+Windows CI exercises both 4K rendering paths using a checksum-pinned Mesa software driver, which is used only for tests and is not shipped. The community ZIP contains the official SDL2 runtime and uses the user's installed graphics driver. Hosted CI is Windows Server 2025, not a physical Windows 11 machine. Primary references: [GCC x86 function attributes](https://gcc.gnu.org/onlinedocs/gcc/x86-Function-Attributes.html), [SDL OpenGL loading](https://wiki.libsdl.org/SDL2/SDL_GL_GetProcAddress), [Windows screensaver installation](https://learn.microsoft.com/en-us/windows/win32/devnotes/scrnsave-exe).
