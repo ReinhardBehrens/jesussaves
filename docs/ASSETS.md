@@ -25,7 +25,7 @@ The tool still returned a smaller image. The application therefore performs the 
 
 ## 3D README icon
 
-`docs/logo-3d.png` is the selected built-in image-generation output, **1672 × 941 pixels**. It is displayed at 400 pixels wide in the README. A native 3840 × 2160 image was requested twice, but the image tool returned the smaller dimensions both times. This file is therefore not labelled as a native 4K asset. The previous vector icon remains at `docs/logo.svg`.
+`docs/logo-3d.png` is the final built-in image-generation edit, **1254 × 1254 pixels**, with an alpha-transparent background outside the gold frame. It is displayed at 400 pixels wide in the README. The original landscape outputs were 1672 × 941 pixels despite requests for 3840 × 2160. This file is therefore not labelled as a native 4K asset. The previous vector icon remains at `docs/logo.svg`.
 
 Generation used the built-in tool, not the CLI/API fallback. Final prompt sequence:
 
@@ -38,3 +38,11 @@ Resolution-only enhancement of this exact icon. Preserve the composition, cross,
 ```
 
 Platform logo sources and attribution: [brand assets](brand/README.md).
+
+## Transparent icon edit
+
+The built-in image tool isolated the icon from the supplied landscape image. The output was copied unchanged into `docs/logo-3d.png`; transparency was verified from its RGBA alpha channel.
+
+```text
+Edit this exact icon asset: remove ONLY the black/navy background OUTSIDE the rounded gold outer frame. Keep the entire gold frame and everything inside it unchanged: cross, clouds, light and flames. Output just the isolated rounded-square icon on a truly transparent alpha background, with clean antialiased edges and no rectangular black background, no checkerboard drawn into pixels, no external shadow. Crop the canvas tightly to the icon with a very small transparent margin. Square PNG asset. Preserve original design and high detail; do not redesign.
+```
