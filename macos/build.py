@@ -17,25 +17,41 @@ def run(args):
             message = result.stdout[-12000:].replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
             print('::error::' + message)
         raise subprocess.CalledProcessError(result.returncode, args)
-if platform.system() != 'Darwin' or platform.machine() != 'x86_64':
-    raise SystemExit('Run on an Intel macOS host (or x86_64 Rosetta shell with Intel SDL2).')
+if platform.system() != 'Darwin':
+    raise SystemExit('Run this build on macOS.')
+arch = platform.machine()
+if arch not in ('x86_64', 'arm64'):
+    raise SystemExit('Unsupported Mac architecture: ' + arch)
+label = 'intel' if arch == 'x86_64' else 'arm64'
 run(['python3', 'scripts/pack_background.py'])
-run(['python3', 'macos/prepare.py'])
 out = root / 'build/macos'
+out.mkdir(parents=True, exist_ok=True)
 objects = []
-for source in sorted(out.glob('*.asm')):
-    obj = source.with_suffix('.o')
-    run(['nasm', '-f', 'macho64', '-o', obj, source])
-    objects.append(obj)
+if arch == 'x86_64':
+    run(['python3', 'macos/prepare.py'])
+    for source in sorted(out.glob('*.asm')):
+        obj = source.with_suffix('.o')
+        run(['nasm', '-f', 'macho64', '-o', obj, source])
+        objects.append(obj)
 sdl_flags = shlex.split(subprocess.check_output(['sdl2-config', '--cflags', '--libs'], text=True))
-run(['clang', '-arch', 'x86_64', '-mmacosx-version-min=12.0', '-Wl,-no_pie',
-     '-O2', '-Wall', '-Wextra', '-o', out / 'jesussaves', *objects,
-     'macos/platform.c', *sdl_flags, '-framework', 'OpenGL'])
+source = 'macos/platform.c' if arch == 'x86_64' else 'macos/arm64.c'
+link_flags = ['-Wl,-no_pie'] if arch == 'x86_64' else []
+run(['clang', '-arch', arch, '-mmacosx-version-min=12.0', *link_flags,
+     '-O2', '-ffp-contract=off', '-Wall', '-Wextra', '-o', out / 'jesussaves', *objects,
+     source, *sdl_flags, '-framework', 'OpenGL'])
 app = out / 'Jesus Saves.app'
 contents = app / 'Contents'
+if app.exists():
+    shutil.rmtree(app)
 (contents / 'MacOS').mkdir(parents=True, exist_ok=True)
 (contents / 'Frameworks').mkdir(exist_ok=True)
 shutil.copy2(out / 'jesussaves', contents / 'MacOS/jesussaves')
+if arch == 'arm64':
+    resources = contents / 'Resources'
+    resources.mkdir()
+    for source in ['build/background.bgra', 'assets/text-sdf.bin', 'assets/turbulence.bin',
+                   'shaders/scene.vert', 'shaders/scene.frag']:
+        shutil.copy2(root / source, resources / Path(source).name)
 # Bundle the SDL dylib rather than requiring Homebrew on the user's Mac.
 exe = contents / 'MacOS/jesussaves'
 deps = subprocess.check_output(['otool', '-L', exe], text=True)
@@ -55,4 +71,4 @@ shutil.copy2(root / 'macos/README.md', contents / 'README.md')
 run(['codesign', '--force', '--deep', '--sign', '-', app])
 (root / 'dist').mkdir(exist_ok=True)
 run(['ditto', '-c', '-k', '--sequesterRsrc', '--keepParent', app,
-     root / 'dist/jesussaves-macos-intel.zip'])
+     root / f'dist/jesussaves-macos-{label}.zip'])

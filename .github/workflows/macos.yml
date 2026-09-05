@@ -1,4 +1,4 @@
-name: macOS Intel build
+name: macOS Intel and Apple Silicon builds
 on:
   push:
     branches: [main]
@@ -8,7 +8,15 @@ permissions:
   contents: read
 jobs:
   build:
-    runs-on: macos-15-intel
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15-intel
+            arch: intel
+          - runner: macos-15
+            arch: arm64
+    runs-on: ${{ matrix.runner }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -17,13 +25,9 @@ jobs:
       - run: brew install nasm sdl2
       - run: python3 -m pip install Pillow
       - run: python3 macos/build.py
-      - name: Check CPU rendering and bundled application
-        run: |
-          build/macos/jesussaves --help
-          build/macos/jesussaves --cpu --snapshot
-          python3 -c 'from PIL import Image; im=Image.open("flame.ppm"); assert im.size == (3840,2160)'
-          codesign --verify --deep --strict 'build/macos/Jesus Saves.app'
+      - name: Verify packaged architecture, rendering and signature
+        run: python3 macos/test.py
       - uses: actions/upload-artifact@v4
         with:
-          name: macos-intel
-          path: dist/jesussaves-macos-intel.zip
+          name: macos-${{ matrix.arch }}
+          path: dist/jesussaves-macos-${{ matrix.arch }}.zip
