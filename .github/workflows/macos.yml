@@ -11,7 +11,33 @@ concurrency:
 permissions:
   contents: read
 jobs:
+  superseded-runs:
+    runs-on: ubuntu-24.04
+    permissions:
+      actions: write
+    steps:
+      - name: Cancel superseded Mac branch builds
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+          CURRENT_RUN: ${{ github.run_id }}
+        shell: python
+        run: |
+          import json, os, urllib.request
+          base = 'https://api.github.com/repos/' + os.environ['REPOSITORY'] + '/actions/'
+          headers = {'Authorization': 'Bearer ' + os.environ['GH_TOKEN'], 'Accept': 'application/vnd.github+json'}
+          request = urllib.request.Request(base + 'workflows/macos.yml/runs?per_page=100', headers=headers)
+          for run in json.load(urllib.request.urlopen(request))['workflow_runs']:
+              if run['id'] < int(os.environ['CURRENT_RUN']) and run['head_branch'] == 'main' and run['status'] in ('queued', 'in_progress', 'waiting'):
+                  request = urllib.request.Request(base + 'runs/' + str(run['id']) + '/cancel', headers=headers, method='POST')
+                  try:
+                      urllib.request.urlopen(request).close()
+                      print('Cancelled superseded Mac run', run['id'])
+                  except urllib.error.HTTPError as error:
+                      if error.code != 409: raise
   build:
+    needs: superseded-runs
+    timeout-minutes: 15
     strategy:
       fail-fast: false
       matrix:
