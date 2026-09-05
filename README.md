@@ -1,4 +1,17 @@
-# JESUS SAVES · 4K Ubuntu Screensaver
+<div align="center">
+
+# ✦ JESUS SAVES ✦
+### Light. Hope. Salvation.
+
+**A 4K screensaver with reflective gold lettering, living flames, and a heavenly sky.**
+
+[![Ubuntu download](https://img.shields.io/badge/Download-Ubuntu%20.deb-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.0.0/jesussaves_1.0.0_amd64.deb)
+[![Release](https://img.shields.io/github/v/release/ReinhardBehrens/jesussaves?style=for-the-badge&color=c99a36)](https://github.com/ReinhardBehrens/jesussaves/releases/latest)
+[![License](https://img.shields.io/badge/License-GPL%203.0-blue?style=for-the-badge)](LICENSE)
+
+[**Download**](#download) · [**The Gospel**](#the-gospel-of-jesus-christ) · [**Install**](#install-on-ubuntu) · [**How it works**](docs/ARCHITECTURE.md)
+
+</div>
 
 Reflective gold **JESUS SAVES** lettering floats and rotates above turbulent flames, against a heavenly cloudscape fading into black. A tribute to the dramatic 3D screensavers of the 1990s, built with **NASM x86-64 assembly**, **SSE2**, and an optional **OpenGL 3.3 / GLSL** renderer.
 
@@ -7,6 +20,34 @@ Reflective gold **JESUS SAVES** lettering floats and rotates above turbulent fla
 [![Jesus Saves 4K screensaver — reflective gold lettering, heavenly clouds, and turbulent fire](docs/screenshot.png)](docs/screenshot-4k.png)
 
 *Actual GPU-rendered screenshot. Click for the full 3840 × 2160 image.*
+
+## Download
+
+| Community edition | Download |
+|---|---|
+| **Ubuntu 26.04.1 LTS · Intel / AMD 64-bit** | [**Download the `.deb` installer**](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.0.0/jesussaves_1.0.0_amd64.deb) |
+| Matching source code | [Source archive](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.0.0/jesussaves-1.0.0-source.tar.gz) |
+| Verify your download | [SHA-256 checksums](https://github.com/ReinhardBehrens/jesussaves/releases/download/v1.0.0/SHA256SUMS) |
+
+Free to download, study, and share under the GPL. Windows 11 packaging is in development; the published installer above is for Ubuntu.
+
+## The Gospel of Jesus Christ
+
+> “For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.”
+>
+> **John 3:16 · King James Version**
+
+**The good news is Jesus Christ.** God loves us, yet sin separates us from Him. We cannot earn our salvation through achievements or good works. Jesus, the Son of God, lived without sin, died for our sins, was buried, and rose again on the third day. Through Him, God offers forgiveness, reconciliation, and eternal life.
+
+- **Our need:** all have sinned and fall short of God's glory — *Romans 3:23*.
+- **God's love:** Christ died for us while we were still sinners — *Romans 5:8*.
+- **Christ's victory:** Jesus died for our sins, was buried, and rose again — *1 Corinthians 15:3–4*.
+- **God's gift:** salvation comes by grace through faith, not by works — *Ephesians 2:8–9*.
+- **Our response:** repent and believe the Gospel; confess Jesus as Lord and believe God raised Him from the dead — *Mark 1:15; Romans 10:9–13*.
+
+Turn to Jesus in faith. Speak honestly to Him in prayer, ask His forgiveness, and follow Him. A prayer is not a formula that earns salvation; our trust is in Christ. Read the Gospel of John and seek a Christian church where you can learn the Scriptures, worship, and grow with others.
+
+This project shares that message through art. The clouds and flames are an artistic setting, not a claim to depict heaven or the afterlife literally.
 
 ## Features
 
