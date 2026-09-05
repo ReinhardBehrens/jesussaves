@@ -7,6 +7,7 @@
 FILE *bridge_stderr;
 static SDL_Window *hidden;
 static HWND preview_parent;
+static int preview_was_visible;
 static int saver;
 static POINT initial_mouse;
 static ULONGLONG started;
@@ -49,11 +50,13 @@ SDL_Window *SYSV bridge_SDL_CreateWindowFrom(const void *native) {
     }
     SetWindowPos(child,NULL,0,0,r.right-r.left,r.bottom-r.top,SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
     preview_parent=parent;
+    preview_was_visible=IsWindowVisible(parent);
     SDL_ShowWindow(w);
     return w;
 }
 int SYSV bridge_SDL_PollEvent(SDL_Event *e) {
-    if (preview_parent && (!IsWindow(preview_parent) || !IsWindowVisible(preview_parent))) {
+    if (preview_parent && IsWindowVisible(preview_parent)) preview_was_visible=1;
+    if (preview_parent && (!IsWindow(preview_parent) || (preview_was_visible && !IsWindowVisible(preview_parent)))) {
         memset(e,0,sizeof(*e)); e->type=SDL_QUIT; return 1;
     }
     if (saver && GetTickCount64()-started>1000) {
